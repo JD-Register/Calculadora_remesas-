@@ -407,7 +407,7 @@
       if (!metodo || isNaN(monto) || monto < 20 || !moneda || isNaN(tasa)) {
         return alert('Completa todos los campos correctamente.');
       }
-      let comision =0;
+      let comision = 0;
       let montoEfectivo = monto;
       if (monto < 45) { comision = 5; montoEfectivo = monto -5; }
       const recibido = montoEfectivo * tasa;
