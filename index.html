@@ -12,10 +12,17 @@
       font-family: 'Segoe UI', system-ui, sans-serif;
       background: #eef2f6;
       display: flex; justify-content: center; align-items: center;
-      min-height: 100vh;
+      height: 100vh;
+      height: 100dvh; /* Nuevo: altura dinámica para móviles */
+      margin: 0;
+      padding: 0;
     }
     .app-container {
-      width: 100%; max-width: 420px; height: 95vh; max-height: 850px;
+      width: 100%; max-width: 420px;
+      height: 100vh;
+      height: 100dvh; /* Se ajusta a la ventana real */
+      max-height: 100vh;
+      max-height: 100dvh;
       background: white; border-radius: 32px 32px 0 0;
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       display: flex; flex-direction: column; overflow: hidden; position: relative;
@@ -24,6 +31,7 @@
       background: linear-gradient(135deg, #0b2b5e, #1b4a7a);
       color: white; padding: 16px 20px; font-size: 1.3rem; font-weight: 600;
       display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative; /* Para posicionar el ícono de contacto */
     }
     .main-content {
       flex: 1; overflow-y: auto; padding: 20px 16px 12px;
@@ -111,8 +119,11 @@
     .bottom-nav {
       background: white; border-top: 1px solid #e9eef2;
       display: flex; justify-content: space-around; align-items: center;
-      padding: 8px 4px 12px; box-shadow: 0 -4px 12px rgba(0,0,0,0.04);
+      padding: 8px 4px 12px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom)); /* Espacio extra para el notch */
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.04);
       overflow-x: auto;
+      flex-shrink: 0; /* Evita que se encoja */
     }
     .nav-item {
       display: flex; flex-direction: column; align-items: center; gap: 4px;
@@ -124,6 +135,97 @@
     .nav-item i { font-size: 1.3rem; }
     .main-content::-webkit-scrollbar { width: 5px; }
     .main-content::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 10px; }
+
+    /* ---------- NUEVO: Ícono de contacto ---------- */
+    /* Botón de contacto en el header (icono + "Contáctenos") */
+    
+    /* Bloque de contacto con íconos apilados y texto debajo */
+/* Bloque de contacto con íconos en fila y texto debajo */
+.contact-btn-header {
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 8px 6px 8px;
+  border-radius: 16px;
+  transition: background 0.2s;
+  min-width: 50px;
+}
+.contact-btn-header:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Fila de los dos íconos */
+.contact-icons-row {
+  display: flex;
+  align-items: flex-start; /* para poder subir uno */
+  gap: 0px;
+}
+
+/* Ícono del teléfono (normal) */
+.icon-phone {
+  font-size: 1.1rem;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Ícono del mensaje (suspendido, más arriba) */
+.icon-chat {
+  font-size: 1.1rem;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  margin-top: -6px;  /* lo sube */
+  margin-left: 2px;  /* pequeña separación lateral */
+}
+
+/* Texto "Contactar" debajo */
+.contact-label {
+  font-size: 0.6rem;
+  color: white;
+  font-weight: 600;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Dropdown (se mantiene igual, sin cambios) */
+.contact-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  overflow: hidden;
+  min-width: 180px;
+  z-index: 100;
+  flex-direction: column;
+}
+.contact-dropdown.active {
+  display: flex;
+}
+.contact-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  color: #0b2b5e;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.contact-option:hover {
+  background: #f0f4f9;
+}
+    .contact-option i {
+      width: 20px;
+      text-align: center;
+    }
 
     .toast {
       position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
@@ -157,8 +259,30 @@
 <body>
 <div class="app-container">
   <div class="app-header">
-    <i class="fas fa-exchange-alt"></i> <span id="titulo-header">Calculadora</span>
+  <i class="fas fa-exchange-alt"></i> <span id="titulo-header">Calculadora</span>
+
+  <!-- Bloque de contacto con íconos en fila y texto debajo -->
+  <div class="contact-btn-header" id="contact-btn">
+    <div class="contact-icons-row">
+      <i class="fas fa-phone-alt icon-phone"></i>
+      <i class="fas fa-comment-dots icon-chat"></i>
+    </div>
+    <span class="contact-label">Contactar</span>
+
+    <!-- Menú desplegable (se mantiene igual) -->
+    <div class="contact-dropdown" id="contact-dropdown">
+      <div style="padding: 10px 18px; font-size: 0.8rem; color: #7f8c8d; border-bottom: 1px solid #e9eef2; font-weight: 500;">
+        Contactar a<br><strong style="color:#0b2b5e; font-size:0.95rem;">+53 5 8085330</strong>
+      </div>
+      <a href="tel:+5358085330" class="contact-option">
+        <i class="fas fa-phone"></i> Llamar
+      </a>
+      <a href="https://wa.me/5358085330" target="_blank" class="contact-option">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
   </div>
+</div>
 
   <div class="main-content">
     <!-- Página Calculadora -->
@@ -333,19 +457,15 @@
     const statsResumen = document.getElementById('stats-resumen');
     const graficoMetodos = document.getElementById('grafico-metodos');
 
+    // Contacto
+    const contactBtn = document.getElementById('contact-btn');
+    const contactDropdown = document.getElementById('contact-dropdown');
+
     let monedaSeleccionada = 'cup';
     let ultimoCalculo = null;
 
     // ============================================================
     // 🔧 SECCIÓN DE TASAS DE CAMBIO (EDITAR AQUÍ)
-    // ============================================================
-    // Cada método de pago tiene 3 tasas:
-    //   cup  : tasa para convertir a CUP (pesos cubanos en efectivo)
-    //   mlc  : tasa para convertir a MLC (tarjeta en dólares cubanos)
-    //   usd  : tasa para convertir a USD en efectivo (0 = no disponible)
-    //
-    // 📝 Para cambiar una tasa solo modifica el número correspondiente.
-    //    Ejemplo: "cup: 347.22"  ->  "cup: 350.00"
     // ============================================================
     const tasasBase = {
       EEUU:      { cup: 347.22, mlc: 764.00, usd: 0.925 },
@@ -361,10 +481,7 @@
       PANAMÁ:    { cup: 617,    mlc: 740,    usd: 0.90 }
     };
     // ============================================================
-    // FIN DE SECCIÓN DE TASAS
-    // ============================================================
 
-    // Mapeo de método de pago → código de moneda local
     const monedasLocales = {
       EEUU: 'USD',
       MEX: 'MXN',
@@ -379,17 +496,14 @@
       PANAMÁ: 'USD'
     };
 
-    /** Actualiza el label y placeholder del monto según el método de pago seleccionado */
     function actualizarEtiquetaMonto() {
       const codigo = monedasLocales[selector.value] || 'USD';
       labelMonto.textContent = `Monto a enviar (${codigo})`;
       montoInput.placeholder = `Mínimo 20 ${codigo}`;
     }
 
-    // Escuchar cambios en el selector de método de pago
     selector.addEventListener('change', actualizarEtiquetaMonto);
 
-    // Almacenamiento
     function obtenerConsultas() {
       return JSON.parse(localStorage.getItem('historial_consultas') || '[]');
     }
@@ -733,9 +847,21 @@
       }).join('');
     }
 
+    // ---------- NUEVO: Mostrar/ocultar menú de contacto ----------
+    contactBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      contactDropdown.classList.toggle('active');
+    });
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (!contactBtn.contains(e.target)) {
+        contactDropdown.classList.remove('active');
+      }
+    });
+
     // Inicial
     actualizarBotonActivo();
-    actualizarEtiquetaMonto();   // ← Aplica la moneda correcta desde el inicio
+    actualizarEtiquetaMonto();
     renderConsultas();
     actualizarEstadisticas();
   })();
