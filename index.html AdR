@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Calculadora de Envíos App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #eef2f6;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh;
+    }
+    .app-container {
+      width: 100%; max-width: 420px; height: 95vh; max-height: 850px;
+      background: white; border-radius: 32px 32px 0 0;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      display: flex; flex-direction: column; overflow: hidden; position: relative;
+    }
+    .app-header {
+      background: linear-gradient(135deg, #0b2b5e, #1b4a7a);
+      color: white; padding: 16px 20px; font-size: 1.3rem; font-weight: 600;
+      display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .main-content {
+      flex: 1; overflow-y: auto; padding: 20px 16px 12px;
+      background: #f8fafd; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+    }
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .card {
+      background: white; border-radius: 20px; padding: 20px; margin-bottom: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04); border: 1px solid #e9eef2;
+    }
+    .card h2 {
+      font-size: 1.1rem; margin-bottom: 16px; color: #0b2b5e;
+      display: flex; align-items: center; gap: 8px;
+    }
+    label { font-weight: 500; color: #2c3e50; font-size: 0.9rem; display: block; margin-bottom: 6px; }
+    select, input[type="number"], input[type="text"] {
+      width: 100%; padding: 12px 15px; font-size: 1rem;
+      border: 2px solid #dce4ec; border-radius: 14px; background: white; margin-bottom: 16px;
+    }
+    select:focus, input:focus { border-color: #1b4a7a; outline: none; box-shadow: 0 0 0 3px rgba(27,74,122,0.1); }
+
+    .currency-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .currency-btn {
+      flex: 1 1 0; min-width: 90px; padding: 14px 8px; background: #f0f4f9;
+      border: 2px solid transparent; border-radius: 14px; font-weight: 600; font-size: 0.9rem;
+      color: #0b2b5e; display: flex; flex-direction: column; align-items: center; gap: 4px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .currency-btn i { font-size: 1.3rem; color: #3a6ea5; }
+    .currency-btn.active-currency { background: #1b4a7a; color: white; border-color: #1b4a7a; box-shadow: 0 6px 14px rgba(27,74,122,0.3); }
+    .currency-btn.active-currency i { color: white; }
+
+    .btn-primario {
+      width: 100%; padding: 16px; background: #0b2b5e; color: white; font-weight: 700;
+      font-size: 1.1rem; border: none; border-radius: 18px; display: flex;
+      align-items: center; justify-content: center; gap: 10px; cursor: pointer; margin-top: 8px;
+      transition: all 0.2s;
+    }
+    .btn-primario:hover { background: #123b72; }
+    .btn-secundario {
+      background: white; border: 2px solid #0b2b5e; color: #0b2b5e; padding: 10px 12px;
+      border-radius: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px;
+      cursor: pointer; flex: 1; justify-content: center; font-size: 0.9rem;
+    }
+    .btn-secundario:hover { background: #0b2b5e; color: white; }
+
+    .resultado-box {
+      background: #eef5ff; border-radius: 18px; padding: 20px; margin-top: 16px;
+      border: 1px solid #cddff0; display: none;
+    }
+    .resultado-box.show { display: block; }
+    .resultado-cantidad { font-size: 2.2rem; font-weight: 700; color: #0b2b5e; }
+    .resultado-detalle { margin: 12px 0; font-size: 0.9rem; background: white; padding: 12px; border-radius: 12px; display: flex; flex-direction: column; gap: 6px; }
+    .acciones-resultado { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    .registro-rapido {
+      display: none; margin-top: 12px; background: #f0f4f9; border-radius: 14px; padding: 14px;
+    }
+    .registro-rapido.show { display: block; }
+
+    .lista-item {
+      background: white; border-radius: 16px; padding: 14px; margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04); font-size: 0.9rem;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .lista-item .fecha { color: #7f8c8d; font-size: 0.8rem; }
+    .acciones-item { display: flex; gap: 8px; margin-top: 8px; }
+    .btn-icon {
+      background: none; border: none; color: #7f8c8d; font-size: 1.2rem; cursor: pointer;
+      padding: 6px; border-radius: 8px; transition: 0.2s;
+    }
+    .btn-icon:hover { background: #e9eef2; color: #0b2b5e; }
+    .btn-icon.delete:hover { color: #e74c3c; }
+
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat-card {
+      background: #f8fafd; border-radius: 16px; padding: 16px; text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .stat-card h3 { font-size: 0.8rem; color: #7f8c8d; margin-bottom: 8px; }
+    .stat-card .valor { font-size: 1.8rem; font-weight: 700; color: #0b2b5e; }
+    .stat-card .unidad { font-size: 0.8rem; color: #2c3e50; }
+
+    .bottom-nav {
+      background: white; border-top: 1px solid #e9eef2;
+      display: flex; justify-content: space-around; align-items: center;
+      padding: 8px 4px 12px; box-shadow: 0 -4px 12px rgba(0,0,0,0.04);
+      overflow-x: auto;
+    }
+    .nav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      color: #7f8c8d; font-size: 0.65rem; font-weight: 500;
+      cursor: pointer; padding: 6px 8px; border-radius: 12px; transition: 0.2s;
+      min-width: 55px;
+    }
+    .nav-item.active { color: #0b2b5e; background: #eef3fa; font-weight: 600; }
+    .nav-item i { font-size: 1.3rem; }
+    .main-content::-webkit-scrollbar { width: 5px; }
+    .main-content::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 10px; }
+
+    .toast {
+      position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+      background: #0b2b5e; color: white; padding: 12px 24px;
+      border-radius: 30px; font-size: 0.9rem; font-weight: 500;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2); z-index: 1000;
+      animation: slideUp 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+      white-space: nowrap;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes fadeOut { to { opacity: 0; transform: translateX(-50%) translateY(10px); } }
+
+    .tarjeta-imagen {
+      position: absolute; left: -9999px; top: 0;
+      width: 400px; background: linear-gradient(145deg, #0b2b5e 0%, #1b4a7a 100%);
+      border-radius: 24px; padding: 24px; color: white; font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .tarjeta-imagen .logo { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+    .tarjeta-imagen .monto-envio { font-size: 1.2rem; background: rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 12px; margin-bottom: 16px; }
+    .tarjeta-imagen .recibido { font-size: 3rem; font-weight: 800; text-align: center; margin: 16px 0; }
+    .tarjeta-imagen .detalles { background: rgba(255,255,255,0.15); border-radius: 16px; padding: 16px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .tarjeta-imagen .detalle-item { flex: 1 1 45%; font-size: 0.9rem; }
+    .tarjeta-imagen .detalle-item span { display: block; font-weight: 300; font-size: 0.7rem; opacity: 0.8; }
+    .tarjeta-imagen .firma { margin-top: 20px; font-size: 0.7rem; opacity: 0.7; text-align: center; }
+  </style>
+</head>
+<body>
+<div class="app-container">
+  <div class="app-header">
+    <i class="fas fa-exchange-alt"></i> <span id="titulo-header">Calculadora</span>
+  </div>
+
+  <div class="main-content">
+    <!-- Página Calculadora -->
+    <div id="page-calc" class="page active">
+      <div class="card">
+        <h2><i class="fas fa-globe-americas"></i> Método de pago</h2>
+        <label>Selecciona país o método</label>
+        <select id="selector">
+          <option value="EEUU">EEUU (Zelle)</option>
+          <option value="MEX">México</option>
+          <option value="REAL">Real (Brasil)</option>
+          <option value="CAND">Canadá</option>
+          <option value="BIZUM">Bizum</option>
+          <option value="IBAN">IBAN (Europa)</option>
+          <option value="PERÚ">Perú</option>
+          <option value="URUG">Uruguay</option>
+          <option value="NICARAG">Nicaragua</option>
+          <option value="RUSIA">Rusia</option>
+          <option value="PANAMÁ">Panamá</option>
+        </select>
+        <label>Monto a enviar (USD)</label>
+        <input type="number" id="monto" placeholder="Mínimo 20 USD" min="20">
+      </div>
+
+      <div class="card">
+        <h2><i class="fas fa-coins"></i> Moneda a recibir</h2>
+        <div class="currency-buttons">
+          <button id="btn-cup" class="currency-btn active-currency" data-moneda="cup">
+            <i class="fas fa-money-bill-wave"></i> CUP Efectivo
+          </button>
+          <button id="btn-mlc" class="currency-btn" data-moneda="mlc">
+            <i class="fas fa-credit-card"></i> Tarjeta MLC
+          </button>
+          <button id="btn-usd_ef" class="currency-btn" data-moneda="usd">
+            <i class="fas fa-dollar-sign"></i> USD Efectivo
+          </button>
+        </div>
+        <button id="btn-calcular" class="btn-primario">
+          <i class="fas fa-calculator"></i> Calcular
+        </button>
+
+        <div id="resultado-box" class="resultado-box">
+          <div class="resultado-cantidad" id="resultado-texto"></div>
+          <div class="resultado-detalle" id="detalle-texto"></div>
+          <div class="acciones-resultado">
+            <button class="btn-secundario" id="btn-copiar"><i class="fas fa-copy"></i> Copiar</button>
+            <button class="btn-secundario" id="btn-imagen"><i class="fas fa-camera"></i> Imagen</button>
+            <button class="btn-secundario" id="btn-registrar-envio"><i class="fas fa-save"></i> Registrar envío</button>
+          </div>
+          <div id="registro-rapido" class="registro-rapido">
+            <label>Destinatario / Beneficiario</label>
+            <input type="text" id="destinatario" placeholder="Nombre o referencia">
+            <label>Nota (opcional)</label>
+            <input type="text" id="nota-envio" placeholder="Ej. Pago de factura">
+            <button class="btn-primario" id="btn-guardar-envio" style="margin-top:8px;">
+              <i class="fas fa-check"></i> Guardar en Mis Envíos
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Página Mis Envíos -->
+    <div id="page-envios" class="page">
+      <div class="card">
+        <h2><i class="fas fa-box"></i> Mis Envíos registrados</h2>
+        <input type="text" id="busqueda-envios" placeholder="🔍 Filtrar por destinatario, método...">
+        <div id="lista-envios"></div>
+        <button class="btn-primario" id="btn-agregar-manual" style="margin-top:12px;">
+          <i class="fas fa-plus-circle"></i> Agregar envío manual
+        </button>
+        <div id="form-envio-manual" style="display:none; margin-top:12px; background:#f0f4f9; border-radius:14px; padding:14px;">
+          <label>Método de pago</label>
+          <select id="metodo-manual">
+            <option>EEUU (Zelle)</option><option>México</option><option>Real (Brasil)</option>
+            <option>Canadá</option><option>Bizum</option><option>IBAN (Europa)</option>
+            <option>Perú</option><option>Uruguay</option><option>Nicaragua</option>
+            <option>Rusia</option><option>Panamá</option>
+          </select>
+          <label>Monto USD</label>
+          <input type="number" id="monto-manual" placeholder="Mínimo 20" min="20">
+          <label>Moneda recibida</label>
+          <select id="moneda-manual">
+            <option value="CUP">CUP Efectivo</option>
+            <option value="MLC">Tarjeta MLC</option>
+            <option value="USD">USD Efectivo</option>
+          </select>
+          <label>Tasa aplicada</label>
+          <input type="number" id="tasa-manual" placeholder="Tasa" step="any">
+          <label>Destinatario</label>
+          <input type="text" id="destinatario-manual" placeholder="Nombre">
+          <label>Nota</label>
+          <input type="text" id="nota-manual" placeholder="Opcional">
+          <button class="btn-primario" id="btn-guardar-manual"><i class="fas fa-save"></i> Guardar envío</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Página Historial (solo consultas) -->
+    <div id="page-history" class="page">
+      <div class="card">
+        <h2><i class="fas fa-history"></i> Historial de consultas</h2>
+        <input type="text" id="busqueda-consultas" placeholder="🔍 Filtrar por método o moneda...">
+        <div id="lista-consultas"></div>
+      </div>
+    </div>
+
+    <!-- Página Estadísticas -->
+    <div id="page-stats" class="page">
+      <div class="card">
+        <h2><i class="fas fa-chart-pie"></i> Resumen de envíos realizados</h2>
+        <div class="stats-grid" id="stats-resumen"></div>
+      </div>
+      <div class="card">
+        <h2><i class="fas fa-chart-bar"></i> Métodos más usados</h2>
+        <div id="grafico-metodos"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item active" data-page="calc"><i class="fas fa-calculator"></i><span>Calculadora</span></div>
+    <div class="nav-item" data-page="envios"><i class="fas fa-box"></i><span>Mis Envíos</span></div>
+    <div class="nav-item" data-page="history"><i class="fas fa-history"></i><span>Historial</span></div>
+    <div class="nav-item" data-page="stats"><i class="fas fa-chart-bar"></i><span>Estadísticas</span></div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Páginas
+    const pages = {
+      calc: document.getElementById('page-calc'),
+      envios: document.getElementById('page-envios'),
+      history: document.getElementById('page-history'),
+      stats: document.getElementById('page-stats')
+    };
+    const navItems = document.querySelectorAll('.nav-item');
+    const tituloHeader = document.getElementById('titulo-header');
+
+    // Calculadora
+    const selector = document.getElementById('selector');
+    const montoInput = document.getElementById('monto');
+    const btnCUP = document.getElementById('btn-cup');
+    const btnMLC = document.getElementById('btn-mlc');
+    const btnUSD = document.getElementById('btn-usd_ef');
+    const btnCalcular = document.getElementById('btn-calcular');
+    const resultadoBox = document.getElementById('resultado-box');
+    const resultadoTexto = document.getElementById('resultado-texto');
+    const detalleTexto = document.getElementById('detalle-texto');
+    const btnCopiar = document.getElementById('btn-copiar');
+    const btnImagen = document.getElementById('btn-imagen');
+    const btnRegistrarEnvio = document.getElementById('btn-registrar-envio');
+    const registroRapido = document.getElementById('registro-rapido');
+    const btnGuardarEnvio = document.getElementById('btn-guardar-envio');
+    const destinatarioInput = document.getElementById('destinatario');
+    const notaInput = document.getElementById('nota-envio');
+
+    // Mis Envíos
+    const busquedaEnvios = document.getElementById('busqueda-envios');
+    const listaEnvios = document.getElementById('lista-envios');
+    const btnAgregarManual = document.getElementById('btn-agregar-manual');
+    const formEnvioManual = document.getElementById('form-envio-manual');
+    const btnGuardarManual = document.getElementById('btn-guardar-manual');
+
+    // Historial consultas
+    const busquedaConsultas = document.getElementById('busqueda-consultas');
+    const listaConsultas = document.getElementById('lista-consultas');
+
+    // Estadísticas
+    const statsResumen = document.getElementById('stats-resumen');
+    const graficoMetodos = document.getElementById('grafico-metodos');
+
+    let monedaSeleccionada = 'cup';
+    let ultimoCalculo = null;
+
+    const tasasBase = {
+      EEUU: { cup: 347.22, mlc: 764.00, usd: 0.925 },
+      MEX: { cup: 27.00, mlc: 740, usd: 0.90 },
+      REAL: { cup: 105.00, mlc: 130, usd: 0 },
+      CAND: { cup: 617, mlc: 740, usd: 0.90 },
+      BIZUM: { cup: 640, mlc: 800.00, usd: 0 },
+      IBAN: { cup: 617, mlc: 740, usd: 0.90 },
+      PERÚ: { cup: 617, mlc: 740, usd: 0.90 },
+      URUG: { cup: 617, mlc: 740, usd: 0.90 },
+      NICARAG: { cup: 617, mlc: 740, usd: 0.90 },
+      RUSIA: { cup: 617, mlc: 740, usd: 0.90 },
+      PANAMÁ: { cup: 617, mlc: 740, usd: 0.90 }
+    };
+
+    // Almacenamiento
+    function obtenerConsultas() {
+      return JSON.parse(localStorage.getItem('historial_consultas') || '[]');
+    }
+    function guardarConsultas(lista) {
+      localStorage.setItem('historial_consultas', JSON.stringify(lista));
+    }
+    function obtenerEnvios() {
+      return JSON.parse(localStorage.getItem('envios_registrados') || '[]');
+    }
+    function guardarEnvios(lista) {
+      localStorage.setItem('envios_registrados', JSON.stringify(lista));
+    }
+
+    function mostrarToast(mensaje) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = mensaje;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    // Navegación
+    function cambiarPagina(pageId) {
+      Object.values(pages).forEach(p => p.classList.remove('active'));
+      pages[pageId].classList.add('active');
+      navItems.forEach(n => n.classList.remove('active'));
+      document.querySelector(`.nav-item[data-page="${pageId}"]`).classList.add('active');
+      tituloHeader.textContent = 
+        pageId === 'calc' ? 'Calculadora' :
+        pageId === 'envios' ? 'Mis Envíos' :
+        pageId === 'history' ? 'Historial' : 'Estadísticas';
+
+      if (pageId === 'envios') renderEnvios();
+      else if (pageId === 'history') renderConsultas();
+      else if (pageId === 'stats') actualizarEstadisticas();
+    }
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => cambiarPagina(item.dataset.page));
+    });
+
+    // Botón agregar manual
+    btnAgregarManual.addEventListener('click', () => {
+      formEnvioManual.style.display = formEnvioManual.style.display === 'none' ? 'block' : 'none';
+    });
+
+    btnGuardarManual.addEventListener('click', () => {
+      const metodo = document.getElementById('metodo-manual').value;
+      const monto = parseFloat(document.getElementById('monto-manual').value);
+      const moneda = document.getElementById('moneda-manual').value;
+      const tasa = parseFloat(document.getElementById('tasa-manual').value);
+      const destinatario = document.getElementById('destinatario-manual').value.trim() || 'Sin nombre';
+      const nota = document.getElementById('nota-manual').value.trim();
+
+      if (!metodo || isNaN(monto) || monto < 20 || !moneda || isNaN(tasa)) {
+        return alert('Completa todos los campos correctamente.');
+      }
+      let comision = 0;
+      let montoEfectivo = monto;
+      if (monto < 45) { comision = 5; montoEfectivo = monto - 5; }
+      const recibido = montoEfectivo * tasa;
+
+      const nuevoEnvio = {
+        id: Date.now(),
+        metodo,
+        montoOriginal: monto,
+        comision,
+        moneda,
+        tasa,
+        recibido,
+        destinatario,
+        nota,
+        fecha: new Date().toLocaleString()
+      };
+      const envios = obtenerEnvios();
+      envios.unshift(nuevoEnvio);
+      guardarEnvios(envios);
+      formEnvioManual.style.display = 'none';
+      document.getElementById('monto-manual').value = '';
+      document.getElementById('tasa-manual').value = '';
