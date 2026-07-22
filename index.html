@@ -614,7 +614,7 @@
 
     function calcular() {
       const monto = parseFloat(montoInput.value);
-      if (isNaN(monto) || monto < 20) return alert('Monto mínimo 20');
+      if (isNaN(monto) || monto < 30) return alert('Monto mínimo 30');
       const tasas = obtenerTasas();
       let tasa = monedaSeleccionada === 'cup' ? tasas.cup : (monedaSeleccionada === 'mlc' ? tasas.mlc : tasas.usd);
       if (monedaSeleccionada === 'usd' && tasa === 0) return alert('USD no disponible');
