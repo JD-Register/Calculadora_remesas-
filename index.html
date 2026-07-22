@@ -499,7 +499,7 @@
     function actualizarEtiquetaMonto() {
       const codigo = monedasLocales[selector.value] || 'USD';
       labelMonto.textContent = `Monto a enviar (${codigo})`;
-      montoInput.placeholder = `Mínimo 20 ${codigo}`;
+      montoInput.placeholder = `Mínimo 30 ${codigo}`;
     }
 
     selector.addEventListener('change', actualizarEtiquetaMonto);
