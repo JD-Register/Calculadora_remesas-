@@ -865,6 +865,14 @@
     renderConsultas();
     actualizarEstadisticas();
   })();
+
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/Calculadora_remesas-/service-worker.js")
+    .then(reg => console.log("SW registrado:", reg.scope))
+    .catch(err => console.error("Error registrando SW:", err));
+}
+
 </script>
 </body>
 </html>
