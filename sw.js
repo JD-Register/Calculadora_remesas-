@@ -1,4 +1,4 @@
-const CACHE_NAME = 'calculadora-v1';
+const CACHE_NAME = 'calculadora-v3'; // cambia versión al actualizar
 const ASSETS = [
   './',
   './index.html',
@@ -27,16 +27,21 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch: cache first con fallback
+// Fetch: network first para index.html, cache first para otros recursos
 self.addEventListener('fetch', event => {
   if (event.request.mode === 'navigate') {
+    // Network first: intenta traer la versión nueva del servidor
     event.respondWith(
-      caches.match('./index.html')
-        .then(response => response || fetch(event.request))
+      fetch(event.request).then(response => {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put('./index.html', clone));
+        return response;
+      }).catch(() => caches.match('./index.html'))
     );
     return;
   }
 
+  // Cache first para otros recursos
   event.respondWith(
     caches.match(event.request).then(cached => {
       return cached || fetch(event.request).catch(() => {
