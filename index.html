@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Calculadora GlobalEnvíos App</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="manifest" href="/Calculadora_remesas-/manifest.json">
+<meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" href="/Calculadora_remesas-/icono-192.png">
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -867,11 +871,13 @@
   })();
 
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/Calculadora_remesas-/service-worker.js")
-    .then(reg => console.log("SW registrado:", reg.scope))
-    .catch(err => console.error("Error registrando SW:", err));
-}
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/Calculadora_remesas-/sw.js')
+        .then(reg => console.log('SW registrado con éxito:', reg.scope))
+        .catch(err => console.error('Error al registrar SW:', err));
+    });
+  }
 
 </script>
 </body>
