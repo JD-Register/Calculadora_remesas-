@@ -679,7 +679,7 @@
       const destinatario = datos.destinatario ? `<div class="detalle-item"><span>Destinatario</span> ${datos.destinatario}</div>` : '';
       const monedaLocal = monedasLocales[selector.value] || 'USD';
       tarjeta.innerHTML = `
-        <div class="logo"><i class="fas fa-exchange-alt"></i> Envíos y Divisas</div>
+        <div class="logo"><i class="fas fa-exchange-alt"></i> Comprobante de GlobalEnvíos a Cuba </div>
         <div class="monto-envio"><span style="opacity:0.8;">Envías</span> <strong>${datos.montoOriginal.toFixed(2)} ${monedaLocal}</strong></div>
         <div class="recibido">${formatearMoneda(datos.recibido, datos.moneda)}</div>
         <div class="detalles">
@@ -689,7 +689,7 @@
           <div class="detalle-item"><span>Comisión</span> ${datos.comision > 0 ? '-3 ' + monedaLocal : 'Ninguna'}</div>
           <div class="detalle-item"><span>Fecha</span> ${datos.fecha}</div>
         </div>
-        <div class="firma">Generado con Calculadora de Envíos</div>`;
+        <div class="firma">Gracias 🫂 por elegirnos Servicios de envios de 💱 </div>`;
       document.body.appendChild(tarjeta);
       try {
         const canvas = await html2canvas(tarjeta, { scale: 2, backgroundColor: null });
