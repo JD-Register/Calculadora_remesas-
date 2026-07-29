@@ -624,7 +624,7 @@
       const tasas = obtenerTasas();
       let tasa = monedaSeleccionada === 'cup' ? tasas.cup : (monedaSeleccionada === 'mlc' ? tasas.mlc : tasas.usd);
       if (monedaSeleccionada === 'usd' && tasa === 0) return alert('USD no disponible');
-      if (monedaSeleccionada === 'mlc' && tasa === 0) return alert ('CUP no disponible');
+      if (monedaSeleccionada === 'mlc' && tasa === 0) return alert('CUP no disponible');
       let montoEfectivo = monto;
       let comision = 0;
       if (monto < 45) { comision = 3; montoEfectivo = monto - 3; }
