@@ -562,6 +562,7 @@
       const tasa = parseFloat(document.getElementById('tasa-manual').value);
       const destinatario = document.getElementById('destinatario-manual').value.trim() || 'Sin nombre';
       const nota = document.getElementById('nota-manual').value.trim();
+      const nota = document.getElementById('nota-manual').value.trim();
 
       if (!metodo || isNaN(monto) || monto < 30 || !moneda || isNaN(tasa)) {
         return alert('Completa todos los campos correctamente.');
