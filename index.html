@@ -638,6 +638,7 @@
         moneda: monedaNombre,
         tasa,
         recibido,
+        dirección,
         fecha: new Date().toLocaleString()
       };
 
@@ -725,6 +726,7 @@
         id: Date.now(),
         ...ultimoCalculo,
         destinatario,
+        dirección,
         nota
       };
       const envios = obtenerEnvios();
@@ -732,6 +734,7 @@
       guardarEnvios(envios);
       registroRapido.classList.remove('show');
       destinatarioInput.value = '';
+      dirección.value = '';
       notaInput.value = '';
       mostrarToast('✅ Envío registrado correctamente');
       if (pages.envios.classList.contains('active')) renderEnvios();
