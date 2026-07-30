@@ -679,7 +679,7 @@
       const destinatario = datos.destinatario ? `<div class="detalle-item"><span>Destinatario</span> ${datos.destinatario}</div>` : '';
       const monedaLocal = monedasLocales[selector.value] || 'USD';
       tarjeta.innerHTML = `
-        <div class="logo"><i class="fas fa-exchange-alt"></i> 💲((Comprobante)) Global💱Envíos </div>
+        <div class="logo"><i class="fas fa-exchange-alt"></i> 📃((Comprobante)) Global💱💲Envíos </div>
         <div class="monto-envio"><span style="opacity:0.8;">Envías</span> <strong>${datos.montoOriginal.toFixed(2)} ${monedaLocal}</strong></div>
         <div class="recibido">${formatearMoneda(datos.recibido, datos.moneda)}</div>
         <div class="detalles">
