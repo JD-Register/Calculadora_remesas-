@@ -622,8 +622,8 @@
       if (isNaN(monto) || monto < 30) return alert('Monto mínimo 30');
       const tasas = obtenerTasas();
       let tasa = monedaSeleccionada === 'cup' ? tasas.cup : (monedaSeleccionada === 'mlc' ? tasas.mlc : tasas.usd);
-      if (monedaSeleccionada === 'usd' && tasa === 0) return alert('USD no disponible');
-      if (monedaSeleccionada === 'mlc' && tasa === 0) return alert('CUP en targeta no disponible ; su usted tiene alguna necesidad en particular le gestionamos el crédito en 💳 targeta');
+      if (monedaSeleccionada === 'usd' && tasa === 0) return alert(' Actualmente no disponemos de USD para este país');
+      if (monedaSeleccionada === 'mlc' && tasa === 0) return alert('Actualmente no disponemos de CUP en targeta para este país ; 🔘 si usted tiene alguna necesidad en particular le gestionamos el crédito en 💳 targeta');
       let montoEfectivo = monto;
       let comision = 0;
       if (monto < 45) { comision = 3; montoEfectivo = monto - 3; }
