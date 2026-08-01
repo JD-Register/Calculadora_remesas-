@@ -626,7 +626,7 @@
       const tasas = obtenerTasas();
       let tasa = monedaSeleccionada === 'cup' ? tasas.cup : (monedaSeleccionada === 'mlc' ? tasas.mlc : tasas.usd);
       if (monedaSeleccionada === 'usd' && tasa === 0) return alert(' Actualmente no disponemos de USD para este país');
-      if (monedaSeleccionada === 'mlc' && tasa === 0) return alert('Actualmente no disponemos de CUP en targeta para este país ; 🔘 si usted tiene alguna necesidad en particular le gestionamos el crédito en 💳 targeta');
+      if (monedaSeleccionada === 'mlc' && tasa === 0) return alert('Hola actualmente no disponemos de CUP en targeta para este País .🔘 Si usted tiene alguna necesidad en particular le gestionamos el crédito en 💳 targeta');
       let montoEfectivo = monto;
       let comision = 0;
       if (monto < 45) { comision = 3; montoEfectivo = monto - 3; }
@@ -692,7 +692,7 @@
           <div class="detalle-item"><span>Comisión</span> ${datos.comision > 0 ? '-3 ' + monedaLocal : 'Ninguna'}</div>
           <div class="detalle-item"><span>Fecha</span> ${datos.fecha}</div>
         </div>
-        <div class="firma">Servicios de envios de 💱 divisas en Ciego de Ávila, Morón, Habana .Periodo de entrega dentro las 24h una vez realizado el pago. Una vez entregado el dinero a su familiar le confirmaremos gracias 🫂 por elegirnos</div>`;
+        <div class="firma">Servicios de envios de 💱 divisas en Ciego de Ávila, Morón, Habana. Cumpliremos con usted dentro las 24 horas habiles para cada envio ralizado. Una vez entregado el dinero a su familiar le confirmaremos gracias 🫂 por elegirnos</div>`;
       document.body.appendChild(tarjeta);
       try {
         const canvas = await html2canvas(tarjeta, { scale: 2, backgroundColor: null });
