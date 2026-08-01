@@ -305,6 +305,7 @@
           <option value="NICARAG">Nicaragua</option>
           <option value="RUSIA">Rusia</option>
           <option value="PANAMÁ">Panamá</option>
+          <option value="ECUADOR">Ecuador</option>
         </select>
         <label id="label-monto">Monto a enviar (USD)</label>
         <input type="number" id="monto" placeholder="Mínimo 20 USD" min="20">
@@ -471,18 +472,19 @@
     // 🔧 SECCIÓN DE TASAS DE CAMBIO (EDITAR AQUÍ)
     // ============================================================
     const tasasBase = {
-      EEUU:      { cup: 625.00, mlc: 0.00, usd: 0.90 },
+      EEUU:      { cup: 630.00, mlc: 0.00, usd: 0.90 },
       MEX:       { cup: 30.00,  mlc: 0.00,  usd: 0.00 },
       REAL:      { cup: 103.00, mlc: 0.00,    usd: 0.00 },
       CAND:      { cup: 360.00,  mlc: 0.00,    usd: 0.00 },
-      BIZUM:     { cup: 650.00,  mlc: 0.00,    usd: 0.945 },
-      IBAN:      { cup: 675.00,  mlc: 0.00,    usd: 0.00 },
-      TROPIPAY:  { cup: 675.00,  mlc: 0.00,    usd: 0.953 },
-      PERÚ:      { cup: 120.00,  mlc: 0.00,    usd: 0.00 },
+      BIZUM:     { cup: 660.00,  mlc: 0.00,    usd: 0.945 },
+      IBAN:      { cup: 680.00,  mlc: 0.00,    usd: 0.00 },
+      TROPIPAY:  { cup: 680.00,  mlc: 0.00,    usd: 0.953 },
+      PERÚ:      { cup: 125.00,  mlc: 0.00,    usd: 0.00 },
       URUG:      { cup: 10.50,   mlc: 0.00,    usd: 0.00 },
       NICARAG:   { cup: 10.00,   mlc: 0.00,    usd: 0.00 },
       RUSIA:     { cup: 4.00,    mlc: 0.00,    usd: 0.00 },
-      PANAMÁ:    { cup: 581.00,  mlc: 0.00,    usd: 0.00 },
+      PANAMÁ:    { cup: 580.00,  mlc: 0.00,    usd: 0.00 },
+      ECUADOR:   { cup: 0.00,    mlc: 0.00,    usd: 0.00 },
     };
     // ============================================================
 
@@ -499,6 +501,7 @@
       NICARAG: 'NIO',
       RUSIA: 'RUB',
       PANAMÁ: 'USD'
+      ECUADOR: ECU
     };
 
     function actualizarEtiquetaMonto() {
