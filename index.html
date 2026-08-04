@@ -571,7 +571,7 @@
       }
       let comision = 0;
       let montoEfectivo = monto;
-      if (monto < 49) { comision = 1.50; montoEfectivo = monto -1.50; }
+      if (monto < 49) { comision = 2.3; montoEfectivo = monto -2.3; }
       const recibido = montoEfectivo * tasa;
 
       const nuevoEnvio = {
@@ -629,7 +629,7 @@
       if (monedaSeleccionada === 'mlc' && tasa === 0) return alert('Hola actualmente no disponemos de CUP en targeta para este País .🔘 Si usted tiene alguna necesidad en particular le gestionamos el crédito en 💳 targeta');
       let montoEfectivo = monto;
       let comision = 0;
-      if (monto < 49) { comision = 1.50; montoEfectivo = monto - 1.50; }
+      if (monto < 49) { comision = 2.3; montoEfectivo = monto - 2.3; }
       const recibido = montoEfectivo * tasa;
       const monedaNombre = monedaSeleccionada === 'cup' ? 'CUP' : (monedaSeleccionada === 'mlc' ? 'MLC' : 'USD');
 
