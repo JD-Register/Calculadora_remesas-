@@ -427,7 +427,7 @@
     const navItems = document.querySelectorAll('.nav-item');
     const tituloHeader = document.getElementById('titulo-header');
 
-    // Calculadora Globalenvios(ca)(hv)  Actualización 1/08/026
+    // Calculadora Globalenvios(ca)(hv)  Actualización 3/08/026
     const selector = document.getElementById('selector');
     const montoInput = document.getElementById('monto');
     const labelMonto = document.getElementById('label-monto');
@@ -566,7 +566,7 @@
       const destinatario = document.getElementById('destinatario-manual').value.trim() || 'Sin nombre';
       const nota = document.getElementById('nota-manual').value.trim();
 
-      if (!metodo || isNaN(monto) || monto < 30 || !moneda || isNaN(tasa)) {
+      if (!metodo || isNaN(monto) || monto < 20 || !moneda || isNaN(tasa)) {
         return alert('Completa todos los campos correctamente.');
       }
       let comision = 0;
@@ -622,14 +622,14 @@
 
     function calcular() {
       const monto = parseFloat(montoInput.value);
-      if (isNaN(monto) || monto < 30) return alert('Monto mínimo 30');
+      if (isNaN(monto) || monto < 50) return alert('Monto mínimo 50');
       const tasas = obtenerTasas();
       let tasa = monedaSeleccionada === 'cup' ? tasas.cup : (monedaSeleccionada === 'mlc' ? tasas.mlc : tasas.usd);
       if (monedaSeleccionada === 'usd' && tasa === 0) return alert(' Actualmente no disponemos de USD cash para este país');
       if (monedaSeleccionada === 'mlc' && tasa === 0) return alert('Hola actualmente no disponemos de CUP en targeta para este País .🔘 Si usted tiene alguna necesidad en particular le gestionamos el crédito en 💳 targeta');
       let montoEfectivo = monto;
       let comision = 0;
-      if (monto < 50) { comision = 2.50; montoEfectivo = monto - 2.50; }
+      if (monto < 30) { comision = 2.50; montoEfectivo = monto - 2.50; }
       const recibido = montoEfectivo * tasa;
       const monedaNombre = monedaSeleccionada === 'cup' ? 'CUP' : (monedaSeleccionada === 'mlc' ? 'MLC' : 'USD');
 
