@@ -427,7 +427,7 @@
     const navItems = document.querySelectorAll('.nav-item');
     const tituloHeader = document.getElementById('titulo-header');
 
-    // Calculadora Globalenvios(ca)(hv)Actualización 4/08/026
+    // Calculadora Globalenvios(ca)(hv) Actualización 4/08/026
     const selector = document.getElementById('selector');
     const montoInput = document.getElementById('monto');
     const labelMonto = document.getElementById('label-monto');
@@ -646,7 +646,7 @@
       resultadoTexto.textContent = formatearMoneda(recibido, monedaSeleccionada);
       detalleTexto.innerHTML = `
         <div><strong>Envías:</strong> ${monto.toFixed(2)} ${monedasLocales[selector.value] || 'USD'}</div>
-        ${comision > 0 ? `<div><strong>Comisión (-1.5 ${monedasLocales[selector.value] || 'USD'}):</strong> se descuenta</div>` : ''}
+        ${comision > 0 ? `<div><strong>Comisión (-2.3 ${monedasLocales[selector.value] || 'USD'}):</strong> se descuenta</div>` : ''}
         <div><strong>Tasa:</strong> ${tasa.toFixed(2)}</div>
         <div><strong>Recibes:</strong> ${formatearMoneda(recibido, monedaSeleccionada)}</div>
       `;
