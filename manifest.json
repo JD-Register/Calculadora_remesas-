@@ -1,7 +1,7 @@
 {
   "id": "com.jdregister.calc_remesa",
   "name": "Calculadora Remesas",
-  "short_name": "Calc-🌎Globalenvio$",
+  "short_name": "Calc-🌎Globalenvios $",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
