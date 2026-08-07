@@ -1,7 +1,7 @@
 {
-  "id": "com.jdregister.calc_Globalenvios",
-  "name": "Calculadora Remesas Globalenvios",
-  "short_name": "Calc-Glbalenvios ",
+  "id": "com.jdregister.calc_remesa",
+  "name": "Calculadora Remesas",
+  "short_name": "Calc-Remesa € ",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
