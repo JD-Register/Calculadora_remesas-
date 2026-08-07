@@ -1,7 +1,7 @@
 {
   "id": "com.jdregister.calc_remesa",
-  "name": "Calculadora Remesas",
-  "short_name": "GL🌎BALENVIOS $",
+  "name": "Calculadora GL🌎BALENVÍOS",
+  "short_name": "GL🌎BALENVIOS CAHV",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
