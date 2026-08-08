@@ -1,7 +1,7 @@
 {
   "id": "com.jdregister.calc_remesa",
-  "name": "Calculadora GL🌎BALENVÍOS",
-  "short_name": "G🌎bal Envi",
+  "name": "Calc_Gl🌎bal envios ",
+  "short_name": "Gl🌎bal Envi",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
