@@ -625,7 +625,7 @@
 
     function calcular() {
       const monto = parseFloat(montoInput.value);
-      if (isNaN(monto) || monto < 30) return alert('Monto mínimo 30');
+      if (isNaN(monto) || monto < 0 ) return alert('Monto mínimo ');
       const tasas = obtenerTasas();
       let tasa = monedaSeleccionada === 'cup' ? tasas.cup : (monedaSeleccionada === 'mlc' ? tasas.mlc : tasas.usd);
       if (monedaSeleccionada === 'usd' && tasa === 0) return alert(' Actualmente no disponemos de USD cash para este país');
