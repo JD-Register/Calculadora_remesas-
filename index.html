@@ -510,7 +510,7 @@
     function actualizarEtiquetaMonto() {
       const codigo = monedasLocales[selector.value] || 'USD';
       labelMonto.textContent = `Monto a enviar (${codigo})`;
-      montoInput.placeholder = `Mínimo 25 Zelle ${codigo}`;
+      montoInput.placeholder = `Mínimo 25${codigo}`;
     }
 
     selector.addEventListener('change', actualizarEtiquetaMonto);
