@@ -1,7 +1,7 @@
 {
   "id": "com.jdregister.calc_remesa",
-  "name": "Calc_GL🌎bal ENV ",
-  "short_name": "GL🌎bal ENV",
+  "name": "Calc_GL🌎BAL ENV ",
+  "short_name": "GL🌎BAL ENV",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
