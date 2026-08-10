@@ -510,7 +510,7 @@
     function actualizarEtiquetaMonto() {
       const codigo = monedasLocales[selector.value] || 'USD';
       labelMonto.textContent = `Monto a enviar (${codigo})`;
-      montoInput.placeholder = `Mínimo 30 ${codigo}`;
+      montoInput.placeholder = `Mínimo 25 Zelle ${codigo}`;
     }
 
     selector.addEventListener('change', actualizarEtiquetaMonto);
@@ -625,7 +625,7 @@
 
     function calcular() {
       const monto = parseFloat(montoInput.value);
-      if (isNaN(monto) || monto < 0 ) return alert('Monto mínimo ');
+      if (isNaN(monto) || monto < 25) return alert('Monto mínimo 25');
       const tasas = obtenerTasas();
       let tasa = monedaSeleccionada === 'cup' ? tasas.cup : (monedaSeleccionada === 'mlc' ? tasas.mlc : tasas.usd);
       if (monedaSeleccionada === 'usd' && tasa === 0) return alert(' Actualmente no disponemos de USD cash para este país');
