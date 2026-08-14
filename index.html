@@ -577,7 +577,7 @@
       }
       let comision = 0;
       let montoEfectivo = monto;
-      if (monto < 49.9) { comision = 4.7; montoEfectivo = monto -4.7; }
+      if (monto < 49.9) { comision = 5; montoEfectivo = monto -5; }
       const recibido = montoEfectivo * tasa;
 
       const nuevoEnvio = {
@@ -635,7 +635,7 @@
       if (monedaSeleccionada === 'mlc' && tasa === 0) return alert('Hola actualmente no disponemos de CUP en targeta para este País .🔘 Si usted tiene alguna necesidad en particular le gestionamos el crédito en 💳 targeta');
       let montoEfectivo = monto;
       let comision = 0;
-      if (monto < 49.9) { comision = 4.7; montoEfectivo = monto -4.7; }
+      if (monto < 49.9) { comision = 5; montoEfectivo = monto -5; }
       const recibido = montoEfectivo * tasa;
       const monedaNombre = monedaSeleccionada === 'cup' ? 'CUP' : (monedaSeleccionada === 'mlc' ? 'MLC' : 'USD');
 
@@ -652,7 +652,7 @@
       resultadoTexto.textContent = formatearMoneda(recibido, monedaSeleccionada);
       detalleTexto.innerHTML = `
         <div><strong>Envías:</strong> ${monto.toFixed(2)} ${monedasLocales[selector.value] || 'USD'}</div>
-        ${comision > 0 ? `<div><strong>Comisión (-4.7 ${monedasLocales[selector.value] || 'USD'}):</strong> se descuenta</div>` : ''}
+        ${comision > 0 ? `<div><strong>Comisión (-5 ${monedasLocales[selector.value] || 'USD'}):</strong> se descuenta</div>` : ''}
         <div><strong>Tasa:</strong> ${tasa.toFixed(2)}</div>
         <div><strong>Recibes:</strong> ${formatearMoneda(recibido, monedaSeleccionada)}</div>
       `;
