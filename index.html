@@ -858,13 +858,13 @@
         <h2><i class="fas fa-globe-americas"></i> Método de pago</h2>
         <label>Selecciona país o método</label>
         <select id="selector">
-          <option value="EEUU">EEUU 🔀(50 Zelle)</option>
-          <option value="MEX">México 🔀(Transfer🔸Oxxo)</option>
-          <option value="REAL">Brasil 🔀(PIX)</option>
-          <option value="CAND">Canadá 🔀(E-Transfer)</option>
-          <option value="BIZUM">Europa 🔀(Bizum)</option>
-          <option value="IBAN">(Europa) 🔀 (IBAN)</option>
-          <option value="TROPIPAY">Europa 🔀 (Tropipay) </option>
+          <option value="EEUU">EEUU ( 50 Zelle 📈 0 comisión)</option>
+          <option value="MEX">México</option>
+          <option value="REAL">Real (Brasil)</option>
+          <option value="CAND">Canadá</option>
+          <option value="BIZUM">Bizum</option>
+          <option value="IBAN">IBAN (Europa)</option>
+          <option value="TROPIPAY">Tropipay (Europa)</option>
           <option value="PERÚ">Perú</option>
           <option value="URUG">Uruguay</option>
           <option value="NICARAG">Nicaragua</option>
@@ -1107,7 +1107,7 @@
     // 🔧 SECCIÓN DE TASAS DE CAMBIO - EDITAR AQUÍ
     // ============================================================
     const tasasBase = {
-      EEUU:      { cup: 630.00, mlc: 0.00, usd: 0.9091},
+      EEUU:      { cup: 630.00, mlc: 0.00, usd: 0.90 },
       MEX:       { cup: 30.00,  mlc: 0.00,  usd: 0.00 },
       REAL:      { cup: 100.00, mlc: 0.00,    usd: 0.00 },
       CAND:      { cup: 362.00,  mlc: 0.00,    usd: 0.00 },
@@ -1143,7 +1143,7 @@
           { 
             campo: "nombre", 
             etiqueta: "Nombre del Titular", 
-            valor: "Gilberto Roque", 
+            valor: "PENDIENTE DE CONFIGURAR", 
             requerido: true,
             tipo: "texto"
           },
@@ -1157,7 +1157,7 @@
           { 
             campo: "correo", 
             etiqueta: "Correo Electrónico", 
-            valor: "arcaribean2026@gmail.com", 
+            valor: "PENDIENTE DE CONFIGURAR", 
             requerido: true,
             tipo: "email"
           },
@@ -1184,14 +1184,14 @@
           { 
             campo: "titular", 
             etiqueta: "Titular de la Cuenta", 
-            valor: "PENDIENTE A CONFIGURAR", 
+            valor: "RUBEN REYNERIO ALMAGUER", 
             requerido: true,
             tipo: "texto"
           },
           { 
             campo: "numero_cuenta", 
             etiqueta: "Número de Cuenta", 
-            valor: "PENDIENTE A CONFIGURAR", 
+            valor: "721180100034642960", 
             requerido: true,
             tipo: "numero"
           },
@@ -1225,7 +1225,7 @@
           { 
             campo: "chave_pix", 
             etiqueta: "Chave Pix", 
-            valor: "PENDIENTE A CONFIGURAR", 
+            valor: "pastelespantry@gmail.com", 
             requerido: true,
             tipo: "email"
           },
@@ -1266,21 +1266,21 @@
           { 
             campo: "nombre_negocio", 
             etiqueta: "Nombre del Negocio", 
-            valor: "PENDIENTE A CONFIGURAR", 
+            valor: "Negocio Chaviano", 
             requerido: true,
             tipo: "texto"
           },
           { 
             campo: "titular_registrado", 
             etiqueta: "Titular Registrado", 
-            valor: "PENDIENTE A CONFIGURAR", 
+            valor: "Emigdio Chávez Vazquez", 
             requerido: true,
             tipo: "texto"
           },
           { 
             campo: "telefono", 
             etiqueta: "Teléfono Bizum", 
-            valor: "PENDIENTE A CONFIGURAR", 
+            valor: "+34 643 57 64 08", 
             requerido: true,
             tipo: "telefono"
           },
@@ -1329,7 +1329,7 @@
           { 
             campo: "cuenta_santander", 
             etiqueta: "Cuenta (Dentro de Santander)", 
-            valor: "PENDIENTE A CONFIGURAR", 
+            valor: "1672991", 
             requerido: true,
             tipo: "numero"
           },
@@ -1350,7 +1350,7 @@
           { 
             campo: "cuenta_otros_bancos", 
             etiqueta: "Cuenta (Desde otros bancos)", 
-            valor: "PENDIENTE A CONFIGURAR", 
+            valor: "0071000001672991", 
             requerido: true,
             tipo: "numero"
           },
@@ -1364,7 +1364,7 @@
           { 
             campo: "numero_cuenta_anterior", 
             etiqueta: "Número de Cuenta Anterior", 
-            valor: "PENDIENTE A CONFIGURAR", 
+            valor: "601-0580735", 
             requerido: false,
             tipo: "numero"
           },
@@ -1384,8 +1384,8 @@
           }
         ],
         instrucciones: [
-          "Para transferencias dentro de Santander usar cuenta: ",
-          "Para transferencias desde otros bancos usar cuenta: ",
+          "Para transferencias dentro de Santander usar cuenta: 1672991",
+          "Para transferencias desde otros bancos usar cuenta: 0071000001672991",
           "Siempre poner el # de cédula en las observaciones",
           "El concepto debe ser relacionado a comida casera"
         ]
@@ -1407,6 +1407,25 @@
       RUSIA: 'RUB',
       PANAMÁ: 'USD',
       ECUADOR: 'USD'
+    };
+    
+   
+   // Aqui se asigna el valor minimo de envio por monedas
+   
+    const minimoenvio = {
+      EEUU: 50,
+      MEX: 40,
+      REAL: 30,
+      CAND: 25,
+      BIZUM: 20,
+      IBAN: 50,
+      TROPIPAY: 30,
+      PERÚ: 50,
+      URUG: 40,
+      NICARAG: 25,
+      RUSIA: 30,
+      PANAMÁ: 30,
+      ECUADOR: 50
     };
 
     // Páginas
@@ -1469,7 +1488,11 @@
     function actualizarEtiquetaMonto() {
       const codigo = monedasLocales[selector.value] || 'USD';
       labelMonto.textContent = `Monto a enviar (${codigo})`;
-      montoInput.placeholder = `Mínimo 25 ${codigo}`;
+      
+      const minimoenviomon = minimoenvio[selector.value];
+      
+      
+      montoInput.placeholder = `Mínimo ${minimoenviomon} ${codigo}`;
     }
 
     selector.addEventListener('change', actualizarEtiquetaMonto);
