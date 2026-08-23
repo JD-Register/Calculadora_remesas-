@@ -29,29 +29,164 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       display: flex; flex-direction: column; overflow: hidden; position: relative;
     }
+    
+    /* ============ HEADER ARREGLADO Y ESTANDARIZADO ============ */
     .app-header {
       background: linear-gradient(135deg, #0b2b5e, #1b4a7a);
-      color: white; padding: 16px 20px; font-size: 1.1rem; font-weight: 600;
-      display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      color: white;
+      padding: 12px 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
       position: relative;
-      flex-wrap: wrap;
+      z-index: 50;
     }
-    .fecha-actual {
+    
+    .header-top-row {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.8rem;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+    }
+    
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .header-title i {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    
+    .header-title span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .contact-btn-header {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 10px;
+      border-radius: 12px;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+    
+    .contact-btn-header:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+    
+    .contact-icons-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0px;
+    }
+    
+    .icon-phone {
+      font-size: 1rem;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    
+    .icon-chat {
+      font-size: 1rem;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      margin-top: -4px;
+      margin-left: 2px;
+    }
+    
+    .contact-label {
+      font-size: 0.55rem;
+      color: white;
+      font-weight: 600;
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .contact-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      overflow: hidden;
+      min-width: 180px;
+      z-index: 100;
+      flex-direction: column;
+      animation: slideDown 0.3s ease-out;
+    }
+    
+    .contact-dropdown.active {
+      display: flex;
+    }
+    
+    .contact-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      color: #0b2b5e;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: background 0.3s;
+    }
+    
+    .contact-option:hover {
+      background: #f0f4f9;
+      padding-left: 22px;
+    }
+    
+    .contact-option i {
+      width: 20px;
+      text-align: center;
+    }
+    
+    .header-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .fecha-actual {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
       font-weight: 400;
       color: rgba(255, 255, 255, 0.9);
       background: rgba(255, 255, 255, 0.15);
-      padding: 4px 10px;
-      border-radius: 12px;
-      margin-left: auto;
-      margin-right: 10px;
+      padding: 4px 12px;
+      border-radius: 10px;
     }
+    
     .fecha-actual i {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
     }
+    /* ============ FIN HEADER ARREGLADO ============ */
+    
     .main-content {
       flex: 1; overflow-y: auto; padding: 20px 16px 12px;
       background: #f8fafd; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
@@ -225,84 +360,6 @@
     .main-content::-webkit-scrollbar { width: 5px; }
     .main-content::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 10px; }
     .main-content::-webkit-scrollbar-track { background: #f0f4f9; }
-
-    /* Contacto */
-    .contact-btn-header {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 6px 8px 6px 8px;
-      border-radius: 16px;
-      transition: background 0.3s;
-      min-width: 50px;
-    }
-    .contact-btn-header:hover {
-      background: rgba(255, 255, 255, 0.35);
-    }
-    .contact-icons-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 0px;
-    }
-    .icon-phone {
-      font-size: 1.1rem;
-      color: white;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
-    .icon-chat {
-      font-size: 1.1rem;
-      color: white;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-      margin-top: -6px;
-      margin-left: 2px;
-    }
-    .contact-label {
-      font-size: 0.6rem;
-      color: white;
-      font-weight: 600;
-      margin-top: 3px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .contact-dropdown {
-      display: none;
-      position: absolute;
-      top: calc(100% + 6px);
-      right: 0;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      overflow: hidden;
-      min-width: 180px;
-      z-index: 100;
-      flex-direction: column;
-      animation: slideDown 0.3s ease-out;
-    }
-    .contact-dropdown.active {
-      display: flex;
-    }
-    .contact-option {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 18px;
-      color: #0b2b5e;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: background 0.3s;
-    }
-    .contact-option:hover {
-      background: #f0f4f9;
-      padding-left: 22px;
-    }
-    .contact-option i {
-      width: 20px;
-      text-align: center;
-    }
 
     /* Toast */
     .toast {
@@ -787,13 +844,13 @@
         font-size: 1.1rem;
       }
       .app-header {
-        font-size: 0.9rem;
-        padding: 12px 15px;
+        padding: 10px 12px;
+      }
+      .header-title {
+        font-size: 0.85rem;
       }
       .fecha-actual {
         font-size: 0.7rem;
-        margin-left: 5px;
-        margin-right: 5px;
       }
       .campo-dato {
         padding: 10px;
@@ -812,44 +869,52 @@
 </head>
 <body>
 <div class="app-container">
+  <!-- ============ HEADER ESTANDARIZADO ============ -->
   <div class="app-header">
-    <i class="fas fa-exchange-alt"></i> 
-    <span id="titulo-header">CALCULADORA_GL🌎BAL ENVIOS💲CAHV</span>
-    
-    <!-- 📅 FECHA ACTUAL - Se actualiza automáticamente -->
-    <div class="fecha-actual">
-      <i class="fas fa-calendar-alt"></i>
-      <span id="fecha-actual"></span>
-    </div>
-  
-    <!-- Bloque de contacto -->
-    <div class="contact-btn-header" id="contact-btn">
-      <div class="contact-icons-row">
-        <i class="fas fa-phone-alt icon-phone"></i>
-        <i class="fas fa-comment-dots icon-chat"></i>
+    <!-- Fila superior: Título + Botón Contactar -->
+    <div class="header-top-row">
+      <div class="header-title">
+        <i class="fas fa-exchange-alt"></i>
+        <span id="titulo-header">CALCULADORA_GL🌎BAL ENVIOS💲CAHV</span>
       </div>
-      <span class="contact-label">Contactar</span>
-
-      <div class="contact-dropdown" id="contact-dropdown">
-        <div style="padding: 10px 18px; font-size: 0.8rem; color: #7f8c8d; border-bottom: 1px solid #e9eef2; font-weight: 500;">
-          Contactar a<br><strong style="color:#0b2b5e; font-size:0.95rem;">+53 5 8085330</strong>
+      
+      <!-- Bloque de contacto -->
+      <div class="contact-btn-header" id="contact-btn">
+        <div class="contact-icons-row">
+          <i class="fas fa-phone-alt icon-phone"></i>
+          <i class="fas fa-comment-dots icon-chat"></i>
         </div>
-        <a href="tel:+5358085330" class="contact-option">
-          <i class="fas fa-phone"></i> Llamar
-        </a>
-        <a href="https://wa.me/5358085330" target="_blank" class="contact-option">
-          <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-        <a href="https://t.me/globalesenvios" target="_blank" class="contact-option">
-          <i class="fab fa-telegram"></i> Telegram
-        </a>
-        <!-- 📝 FORMULARIO DE CONTACTO -->
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScfq2pphGB1oKEqdeITvhwH0IVQwbBHfI4_zdVBvV5d_MsDuQ/viewform?pli=1&pli=1" target="_blank" class="contact-option">
-          <i class="fas fa-envelope"></i> Formulario
-        </a>
+        <span class="contact-label">Contactar</span>
+
+        <div class="contact-dropdown" id="contact-dropdown">
+          <div style="padding: 10px 18px; font-size: 0.8rem; color: #7f8c8d; border-bottom: 1px solid #e9eef2; font-weight: 500;">
+            Contactar a<br><strong style="color:#0b2b5e; font-size:0.95rem;">+53 5 8085330</strong>
+          </div>
+          <a href="tel:+5358085330" class="contact-option">
+            <i class="fas fa-phone"></i> Llamar
+          </a>
+          <a href="https://wa.me/5358085330" target="_blank" class="contact-option">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+          <a href="https://t.me/globalesenvios" target="_blank" class="contact-option">
+            <i class="fab fa-telegram"></i> Telegram
+          </a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScfq2pphGB1oKEqdeITvhwH0IVQwbBHfI4_zdVBvV5d_MsDuQ/viewform?pli=1&pli=1" target="_blank" class="contact-option">
+            <i class="fas fa-envelope"></i> Formulario
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Fila inferior: Fecha centrada -->
+    <div class="header-bottom-row">
+      <div class="fecha-actual">
+        <i class="fas fa-calendar-alt"></i>
+        <span id="fecha-actual"></span>
       </div>
     </div>
   </div>
+  <!-- ============ FIN HEADER ESTANDARIZADO ============ -->
 
   <div class="main-content">
     <!-- Página Calculadora -->
@@ -858,22 +923,34 @@
         <h2><i class="fas fa-globe-americas"></i> Método de pago</h2>
         <label>Selecciona país o método</label>
         <select id="selector">
-          <option value="EEUU">EEUU 🔀 (Zelle)</option>
-          <option value="MEX">México 🔀 Transfer 🔸 Oxxo</option>
-          <option value="REAL">Brasil 🔀 (PIX)</option>
-          <option value="CAND">Canadá 🔀 (E-Transfer)</option>
-          <option value="BIZUM">Europa 🔀 (Bizum)</option>
-          <option value="IBAN">Europa 🔀 (IBAN )</option>
-          <option value="TROPIPAY">Europa 🔀 (Tropipay)</option>
-          <option value="PERÚ">Perú</option>
-          <option value="URUG">Uruguay</option>
-          <option value="NICARAG">Nicaragua</option>
-          <option value="RUSIA">Rusia</option>
-          <option value="PANAMÁ">Panamá</option>
-          <option value="ECUADOR">Ecuador</option>
+          <option value="EEUU">🇺🇸 EEUU 🔀 (Zelle)</option>
+          <option value="MEX">🇲🇽 México 🔀 Transfer 🔸 Oxxo</option>
+          <option value="REAL">🇧🇷 Brasil 🔀 (PIX)</option>
+          <option value="CAND">🇨🇦 Canadá 🔀 (E-Transfer)</option>
+          <option value="BIZUM">🇪🇸 Europa 🔀 (Bizum)</option>
+          <option value="IBAN">🇪🇺 Europa 🔀 (IBAN)</option>
+          <option value="TROPIPAY">🇪🇺 Europa 🔀 (Tropipay)</option>
+          <option value="PERÚ">🇵🇪 Perú</option>
+          <option value="URUG">🇺🇾 Uruguay</option>
+          <option value="NICARAG">🇳🇮 Nicaragua</option>
+          <option value="RUSIA">🇷🇺 Rusia</option>
+          <option value="PANAMÁ">🇵🇦 Panamá</option>
+          <option value="ECUADOR">🇪🇨 Ecuador</option>
+          <option value="CHILE">🇨🇱 Chile</option>
+          <option value="ARGENTINA">🇦🇷 Argentina</option>
+          <option value="DUBAI">🇦🇪 Dubai</option>
+          <option value="COLOMBIA">🇨🇴 Colombia</option>
+          <option value="DOMINICANA">🇩🇴 Dominicana</option>
+          <option value="COSTA_RICA">🇨🇷 Costa Rica</option>
+          <option value="GUYANA">🇬🇾 Guyana</option>
+          <option value="VENEZUELA">🇻🇪 Venezuela</option>
+          <option value="SURINAM">🇸🇷 Surinam</option>
+          <option value="CHINA">🇨🇳 China</option>
+          <option value="SERBIA">🇸🇰 Serbia</option>
+          <option value="BOLIVIA">🇧🇴 Bolivia</option>
         </select>
         <label id="label-monto">Monto a enviar (USD)</label>
-        <input type="number" id="monto" placeholder="Mínimo 25 USD" min="25">
+        <input type="number" id="monto" placeholder="Mínimo 50 USD" min="50">
       </div>
 
       <div class="card">
@@ -925,9 +1002,6 @@
         </div>
       </div>
 
-      <!-- ============================================================
-           🔧 SECCIÓN DE PRECIOS DE COMPRA - EDITAR AQUÍ
-           ============================================================ -->
       <div class="moneda-card">
         <div class="moneda-card-header">
           <div class="moneda-info">
@@ -993,9 +1067,6 @@
           <i class="fas fa-check-circle"></i> Compramos
         </span>
       </div>
-      <!-- ============================================================
-           🔧 FIN DE SECCIÓN DE PRECIOS DE COMPRA
-           ============================================================ -->
     </div>
 
     <!-- Página Cuentas Bancarias -->
@@ -1024,11 +1095,30 @@
         <div id="form-envio-manual" style="display:none; margin-top:12px; background:#f0f4f9; border-radius:14px; padding:14px;">
           <label>Método de pago</label>
           <select id="metodo-manual">
-            <option>EEUU (Zelle)</option><option>México</option><option>Real (Brasil)</option>
-            <option>Canadá</option><option>Bizum</option><option>IBAN (Europa)</option>
-            <option>Perú</option><option>Uruguay</option><option>Nicaragua</option>
-            <option>Rusia</option><option>Panamá</option>
-            <option>Ecuador</option>
+            <option>🇺🇸 EEUU (Zelle)</option>
+            <option>🇲🇽 México</option>
+            <option>🇧🇷 Real (Brasil)</option>
+            <option>🇨🇦 Canadá</option>
+            <option>🇪🇸 Bizum</option>
+            <option>🇪🇺 IBAN (Europa)</option>
+            <option>🇵🇪 Perú</option>
+            <option>🇺🇾 Uruguay</option>
+            <option>🇳🇮 Nicaragua</option>
+            <option>🇷🇺 Rusia</option>
+            <option>🇵🇦 Panamá</option>
+            <option>🇪🇨 Ecuador</option>
+            <option>🇨🇱 Chile</option>
+            <option>🇦🇷 Argentina</option>
+            <option>🇦🇪 Dubai</option>
+            <option>🇨🇴 Colombia</option>
+            <option>🇩🇴 Dominicana</option>
+            <option>🇨🇷 Costa Rica</option>
+            <option>🇬🇾 Guyana</option>
+            <option>🇻🇪 Venezuela</option>
+            <option>🇸🇷 Surinam</option>
+            <option>🇨🇳 China</option>
+            <option>🇸🇰 Serbia</option>
+            <option>🇧🇴 Bolivia</option>
           </select>
           <label>Monto USD</label>
           <input type="number" id="monto-manual" placeholder="Mínimo 20" min="20">
@@ -1082,967 +1172,3 @@
 </div>
 
 <script>
-  (function() {
-    // ============================================================
-    // 📅 FUNCIÓN PARA ACTUALIZAR LA FECHA ACTUAL
-    // ============================================================
-    function actualizarFecha() {
-      const ahora = new Date();
-      const opciones = { 
-        weekday: 'short', 
-        day: '2-digit', 
-        month: 'short', 
-        year: 'numeric' 
-      };
-      const fechaFormateada = ahora.toLocaleDateString('es-ES', opciones);
-      document.getElementById('fecha-actual').textContent = fechaFormateada;
-      document.getElementById('fecha-compra').textContent = fechaFormateada;
-    }
-    
-    // Actualizar fecha al cargar y cada minuto
-    actualizarFecha();
-    setInterval(actualizarFecha, 60000);
-
-    // ============================================================
-    // 🔧 SECCIÓN DE TASAS DE CAMBIO - EDITAR AQUÍ
-    // ============================================================
-    const tasasBase = {
-      EEUU:      { cup: 630.00, mlc: 0.00, usd: 0.90 },
-      MEX:       { cup: 30.00,  mlc: 0.00,  usd: 0.00 },
-      REAL:      { cup: 100.00, mlc: 0.00,    usd: 0.00 },
-      CAND:      { cup: 362.00,  mlc: 0.00,    usd: 0.00 },
-      BIZUM:     { cup: 650.00,  mlc: 0.00,    usd: 0.945 },
-      IBAN:      { cup: 670.00,  mlc: 0.00,    usd: 0.00 },
-      TROPIPAY:  { cup: 670.00,  mlc: 0.00,    usd: 0.953 },
-      PERÚ:      { cup: 120.00,  mlc: 0.00,    usd: 0.00 },
-      URUG:      { cup: 10.00,   mlc: 0.00,    usd: 0.00 },
-      NICARAG:   { cup: 10.00,   mlc: 0.00,    usd: 0.00 },
-      RUSIA:     { cup: 4.00,    mlc: 0.00,    usd: 0.00 },
-      PANAMÁ:    { cup: 580.00,  mlc: 0.00,    usd: 0.00 },
-      ECUADOR:   { cup: 567.00,  mlc: 0.00,    usd: 0.00 },
-    };
-    // ============================================================
-
-    // ============================================================
-    // 🔧 SECCIÓN DE CUENTAS BANCARIAS - EDITAR AQUÍ
-    // ============================================================
-    const cuentasBancarias = {
-      EEUU: {
-        pais: "Estados Unidos",
-        bandera: "🇺🇸",
-        moneda: "USD",
-        metodoPago: "Zelle",
-        datosRequeridos: [
-          { 
-            campo: "metodo", 
-            etiqueta: "Método de Pago", 
-            valor: "Zelle", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "nombre", 
-            etiqueta: "Nombre del Titular", 
-            valor: "PENDIENTE DE CONFIGURAR", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "telefono", 
-            etiqueta: "Número de Teléfono", 
-            valor: "PENDIENTE DE CONFIGURAR", 
-            requerido: false,
-            tipo: "telefono"
-          },
-          { 
-            campo: "correo", 
-            etiqueta: "Correo Electrónico", 
-            valor: "PENDIENTE DE CONFIGURAR", 
-            requerido: true,
-            tipo: "email"
-          },
-          { 
-            campo: "descripcion", 
-            etiqueta: "Descripción", 
-            valor: "PENDIENTE DE CONFIGURAR", 
-            requerido: false,
-            tipo: "texto"
-          }
-        ],
-        instrucciones: [
-          "Usar Zelle para transferencias inmediatas",
-          "Incluir nombre completo en la transferencia"
-        ]
-      },
-      
-      MEX: {
-        pais: "México",
-        bandera: "🇲🇽",
-        moneda: "MXN",
-        metodoPago: "Transferencia Bancaria",
-        datosRequeridos: [
-          { 
-            campo: "titular", 
-            etiqueta: "Titular de la Cuenta", 
-            valor: "RUBEN REYNERIO ALMAGUER", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "numero_cuenta", 
-            etiqueta: "Número de Cuenta", 
-            valor: "721180100034642960", 
-            requerido: true,
-            tipo: "numero"
-          },
-          { 
-            campo: "banco", 
-            etiqueta: "Banco", 
-            valor: "BANCO ALBO", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "concepto", 
-            etiqueta: "Concepto", 
-            valor: "ABONO", 
-            requerido: true,
-            tipo: "texto"
-          }
-        ],
-        instrucciones: [
-          "Usar CLABE interbancaria para transferencias SPEI",
-          "El concepto debe ser exactamente: ABONO"
-        ]
-      },
-      
-      BRASIL: {
-        pais: "Brasil",
-        bandera: "🇧🇷",
-        moneda: "BRL",
-        metodoPago: "PIX",
-        datosRequeridos: [
-          { 
-            campo: "chave_pix", 
-            etiqueta: "Chave Pix", 
-            valor: "pastelespantry@gmail.com", 
-            requerido: true,
-            tipo: "email"
-          },
-          { 
-            campo: "banco", 
-            etiqueta: "Banco", 
-            valor: "Sicoob", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "titular", 
-            etiqueta: "Titular de la Cuenta", 
-            valor: "Gabriel Padilla Rodriguez", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "monto_minimo", 
-            etiqueta: "Monto Mínimo", 
-            valor: "100 BRL", 
-            requerido: true,
-            tipo: "numero"
-          }
-        ],
-        instrucciones: [
-          "El monto mínimo de transferencia es 100 BRL",
-          "Usar PIX para transferencias inmediatas"
-        ]
-      },
-      
-      ESPANA: {
-        pais: "España",
-        bandera: "🇪🇸",
-        moneda: "EUR",
-        metodoPago: "Bizum",
-        datosRequeridos: [
-          { 
-            campo: "nombre_negocio", 
-            etiqueta: "Nombre del Negocio", 
-            valor: "Negocio Chaviano", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "titular_registrado", 
-            etiqueta: "Titular Registrado", 
-            valor: "Emigdio Chávez Vazquez", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "telefono", 
-            etiqueta: "Teléfono Bizum", 
-            valor: "+34 643 57 64 08", 
-            requerido: true,
-            tipo: "telefono"
-          },
-          { 
-            campo: "concepto", 
-            etiqueta: "Concepto", 
-            valor: "PAGO DE SERVICIOS", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "monto_minimo", 
-            etiqueta: "Monto Mínimo", 
-            valor: "100 EUR", 
-            requerido: true,
-            tipo: "numero"
-          },
-          { 
-            campo: "condicion_pago", 
-            etiqueta: "Condición de Pago", 
-            valor: "PAGO CUANDO LLEGUEN LOS EUROS", 
-            requerido: true,
-            tipo: "texto"
-          }
-        ],
-        instrucciones: [
-          "El monto mínimo es 100 EUR",
-          "El pago se realiza cuando lleguen los euros",
-          "Usar Bizum para transferencias inmediatas"
-        ]
-      },
-      
-      URUGUAY: {
-        pais: "Uruguay",
-        bandera: "🇺🇾",
-        moneda: "UYU",
-        metodoPago: "Transferencia Bancaria",
-        datosRequeridos: [
-          { 
-            campo: "titular", 
-            etiqueta: "Titular de la Cuenta", 
-            valor: "Massiel de la Caridad Escaig Rubio", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "cuenta_santander", 
-            etiqueta: "Cuenta (Dentro de Santander)", 
-            valor: "1672991", 
-            requerido: true,
-            tipo: "numero"
-          },
-          { 
-            campo: "moneda", 
-            etiqueta: "Moneda", 
-            valor: "UYU", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "sucursal", 
-            etiqueta: "Sucursal", 
-            valor: "71 - Casa Central", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "cuenta_otros_bancos", 
-            etiqueta: "Cuenta (Desde otros bancos)", 
-            valor: "0071000001672991", 
-            requerido: true,
-            tipo: "numero"
-          },
-          { 
-            campo: "tipo_operacion", 
-            etiqueta: "Tipo de Operación", 
-            valor: "OTROS", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "numero_cuenta_anterior", 
-            etiqueta: "Número de Cuenta Anterior", 
-            valor: "601-0580735", 
-            requerido: false,
-            tipo: "numero"
-          },
-          { 
-            campo: "observaciones", 
-            etiqueta: "Observaciones o Asunto", 
-            valor: "PONER SU # CÉDULA", 
-            requerido: true,
-            tipo: "texto"
-          },
-          { 
-            campo: "concepto", 
-            etiqueta: "Concepto Sugerido", 
-            valor: "Comida casera, Flanes, Postres", 
-            requerido: true,
-            tipo: "texto"
-          }
-        ],
-        instrucciones: [
-          "Para transferencias dentro de Santander usar cuenta: 1672991",
-          "Para transferencias desde otros bancos usar cuenta: 0071000001672991",
-          "Siempre poner el # de cédula en las observaciones",
-          "El concepto debe ser relacionado a comida casera"
-        ]
-      }
-    };
-    // ============================================================
-
-    const monedasLocales = {
-      EEUU: 'USD',
-      MEX: 'MXN',
-      REAL: 'BRL',
-      CAND: 'CAD',
-      BIZUM: 'EUR',
-      IBAN: 'EUR',
-      TROPIPAY: 'EUR',
-      PERÚ: 'PEN',
-      URUG: 'UYU',
-      NICARAG: 'NIO',
-      RUSIA: 'RUB',
-      PANAMÁ: 'PAN',
-      ECUADOR: 'ECU'
-    };
-    
-   
-   // Aqui se asigna el valor minimo de envio por monedas
-   
-    const minimoenvio = {
-      EEUU: 50,
-      MEX: 300,
-      REAL: 100,
-      CAND: 50,
-      BIZUM: 50,
-      IBAN: 50,
-      TROPIPAY: 50,
-      PERÚ: 50,
-      URUG: 40,
-      NICARAG: 500,
-      RUSIA: 10000,
-      PANAMÁ: 30,
-      ECUADOR: 50
-    };
-
-    // Páginas
-    const pages = {
-      calc: document.getElementById('page-calc'),
-      compra: document.getElementById('page-compra'),
-      cuentas: document.getElementById('page-cuentas'),
-      envios: document.getElementById('page-envios'),
-      history: document.getElementById('page-history'),
-      stats: document.getElementById('page-stats')
-    };
-    const navItems = document.querySelectorAll('.nav-item');
-    const tituloHeader = document.getElementById('titulo-header');
-
-    // Calculadora
-    const selector = document.getElementById('selector');
-    const montoInput = document.getElementById('monto');
-    const labelMonto = document.getElementById('label-monto');
-    const btnCUP = document.getElementById('btn-cup');
-    const btnMLC = document.getElementById('btn-mlc');
-    const btnUSD = document.getElementById('btn-usd_ef');
-    const btnCalcular = document.getElementById('btn-calcular');
-    const resultadoBox = document.getElementById('resultado-box');
-    const resultadoTexto = document.getElementById('resultado-texto');
-    const detalleTexto = document.getElementById('detalle-texto');
-    const btnCopiar = document.getElementById('btn-copiar');
-    const btnImagen = document.getElementById('btn-imagen');
-    const btnRegistrarEnvio = document.getElementById('btn-registrar-envio');
-    const registroRapido = document.getElementById('registro-rapido');
-    const btnGuardarEnvio = document.getElementById('btn-guardar-envio');
-    const destinatarioInput = document.getElementById('destinatario');
-    const notaInput = document.getElementById('nota-envio');
-
-    // Mis Envíos
-    const busquedaEnvios = document.getElementById('busqueda-envios');
-    const listaEnvios = document.getElementById('lista-envios');
-    const btnAgregarManual = document.getElementById('btn-agregar-manual');
-    const formEnvioManual = document.getElementById('form-envio-manual');
-    const btnGuardarManual = document.getElementById('btn-guardar-manual');
-
-    // Historial consultas
-    const busquedaConsultas = document.getElementById('busqueda-consultas');
-    const listaConsultas = document.getElementById('lista-consultas');
-
-    // Estadísticas
-    const statsResumen = document.getElementById('stats-resumen');
-    const graficoMetodos = document.getElementById('grafico-metodos');
-
-    // Contacto
-    const contactBtn = document.getElementById('contact-btn');
-    const contactDropdown = document.getElementById('contact-dropdown');
-
-    // Cuentas bancarias
-    const contenedorCuentas = document.getElementById('contenedor-cuentas');
-    const buscarCuentas = document.getElementById('buscar-cuentas');
-
-    let monedaSeleccionada = 'cup';
-    let ultimoCalculo = null;
-
-    function actualizarEtiquetaMonto() {
-      const codigo = monedasLocales[selector.value] || 'USD';
-      labelMonto.textContent = `Monto a enviar (${codigo})`;
-      
-      const minimoenviomon = minimoenvio[selector.value];
-      
-      
-      montoInput.placeholder = `Mínimo ${minimoenviomon} ${codigo}`;
-    }
-
-    selector.addEventListener('change', actualizarEtiquetaMonto);
-
-    function obtenerConsultas() {
-      return JSON.parse(localStorage.getItem('historial_consultas') || '[]');
-    }
-    function guardarConsultas(lista) {
-      localStorage.setItem('historial_consultas', JSON.stringify(lista));
-    }
-    function obtenerEnvios() {
-      return JSON.parse(localStorage.getItem('envios_registrados') || '[]');
-    }
-    function guardarEnvios(lista) {
-      localStorage.setItem('envios_registrados', JSON.stringify(lista));
-    }
-
-    function mostrarToast(mensaje) {
-      const toast = document.createElement('div');
-      toast.className = 'toast';
-      toast.textContent = mensaje;
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 3000);
-    }
-
-    // ============================================================
-    // 🔧 FUNCIONES PARA CUENTAS BANCARIAS
-    // ============================================================
-    function renderizarCuentas(filtro = '') {
-      contenedorCuentas.innerHTML = '';
-      
-      let cuentasFiltradas = cuentasBancarias;
-      if (filtro) {
-        const filtroLower = filtro.toLowerCase();
-        cuentasFiltradas = Object.fromEntries(
-          Object.entries(cuentasBancarias).filter(([codigo, cuenta]) => {
-            return cuenta.pais.toLowerCase().includes(filtroLower) ||
-                   cuenta.metodoPago.toLowerCase().includes(filtroLower) ||
-                   cuenta.moneda.toLowerCase().includes(filtroLower);
-          })
-        );
-      }
-      
-      if (Object.keys(cuentasFiltradas).length === 0) {
-        contenedorCuentas.innerHTML = `
-          <div class="card">
-            <p style="text-align: center; color: #7f8c8d;">
-              <i class="fas fa-search" style="font-size: 2rem;"></i><br>
-              No se encontraron cuentas con ese criterio
-            </p>
-          </div>
-        `;
-        return;
-      }
-      
-      Object.entries(cuentasFiltradas).forEach(([codigo, cuenta]) => {
-        const cardCuenta = document.createElement('div');
-        cardCuenta.className = 'cuenta-card';
-        
-        let camposHTML = '';
-        cuenta.datosRequeridos.forEach((dato, index) => {
-          const esRequerido = dato.requerido ? 'requerido' : '';
-          const badgeRequerido = dato.requerido ? 
-            '<span class="badge-requerido">Requerido</span>' : '';
-          
-          camposHTML += `
-            <div class="campo-dato ${esRequerido}">
-              <div class="campo-info">
-                <span class="etiqueta-campo">${dato.etiqueta}${badgeRequerido}</span>
-                <span class="valor-campo">${dato.valor}</span>
-              </div>
-              <button class="btn-copiar-individual" 
-                      onclick="copiarDatoIndividual('${codigo}', ${index})" 
-                      title="Copiar solo este dato">
-                <i class="fas fa-copy"></i>
-              </button>
-            </div>
-          `;
-        });
-        
-        let instruccionesHTML = '';
-        if (cuenta.instrucciones && cuenta.instrucciones.length > 0) {
-          instruccionesHTML = `
-            <div class="instrucciones-lista">
-              <h4><i class="fas fa-info-circle"></i> Instrucciones Importantes</h4>
-              <ul>
-                ${cuenta.instrucciones.map(inst => `<li>${inst}</li>`).join('')}
-              </ul>
-            </div>
-          `;
-        }
-        
-        cardCuenta.innerHTML = `
-          <div class="cuenta-header">
-            <span class="bandera-pais">${cuenta.bandera}</span>
-            <div class="cuenta-titulo">
-              <h3>${cuenta.pais}</h3>
-              <span class="metodo-badge">${cuenta.metodoPago}</span>
-              <span class="moneda-badge">${cuenta.moneda}</span>
-            </div>
-          </div>
-          <div class="campos-contenedor">
-            ${camposHTML}
-          </div>
-          ${instruccionesHTML}
-          <button class="btn-copiar-datos" onclick="copiarDatosCuenta('${codigo}')">
-            <i class="fas fa-copy"></i> Copiar Todos los Datos
-          </button>
-        `;
-        
-        contenedorCuentas.appendChild(cardCuenta);
-      });
-    }
-
-    window.copiarDatoIndividual = function(codigoPais, indexDato) {
-      const cuenta = cuentasBancarias[codigoPais];
-      const dato = cuenta.datosRequeridos[indexDato];
-      
-      if (!dato) {
-        mostrarToast('❌ Error: Dato no encontrado');
-        return;
-      }
-      
-      navigator.clipboard.writeText(dato.valor)
-        .then(() => {
-          mostrarToast(`✅ ${dato.etiqueta} copiado`);
-          
-          const botones = document.querySelectorAll('.btn-copiar-individual');
-          botones.forEach(btn => {
-            if (btn.onclick && btn.onclick.toString().includes(`${codigoPais}', ${indexDato}`)) {
-              btn.classList.add('copiado');
-              btn.innerHTML = '<i class="fas fa-check"></i>';
-              setTimeout(() => {
-                btn.classList.remove('copiado');
-                btn.innerHTML = '<i class="fas fa-copy"></i>';
-              }, 2000);
-            }
-          });
-        })
-        .catch(() => mostrarToast('❌ Error al copiar'));
-    };
-
-    window.copiarDatosCuenta = function(codigoPais) {
-      const cuenta = cuentasBancarias[codigoPais];
-      
-      let textoCopiar = `🏦 DATOS DE TRANSFERENCIA - ${cuenta.pais} ${cuenta.bandera}\n`;
-      textoCopiar += `💰 Método: ${cuenta.metodoPago}\n`;
-      textoCopiar += `💵 Moneda: ${cuenta.moneda}\n`;
-      textoCopiar += `${'='.repeat(40)}\n\n`;
-      
-      cuenta.datosRequeridos.forEach(dato => {
-        textoCopiar += `${dato.etiqueta}: ${dato.valor}\n`;
-      });
-      
-      if (cuenta.instrucciones && cuenta.instrucciones.length > 0) {
-        textoCopiar += `\n📌 INSTRUCCIONES:\n`;
-        cuenta.instrucciones.forEach((inst, index) => {
-          textoCopiar += `${index + 1}. ${inst}\n`;
-        });
-      }
-      
-      navigator.clipboard.writeText(textoCopiar)
-        .then(() => {
-          mostrarToast('✅ Todos los datos copiados');
-          
-          const botones = document.querySelectorAll('.btn-copiar-datos');
-          botones.forEach(btn => {
-            if (btn.onclick && btn.onclick.toString().includes(`${codigoPais}'`)) {
-              btn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
-              btn.style.background = '#27ae60';
-              setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-copy"></i> Copiar Todos los Datos';
-                btn.style.background = '';
-              }, 2000);
-            }
-          });
-        })
-        .catch(() => mostrarToast('❌ Error al copiar'));
-    };
-
-    // Navegación
-    function cambiarPagina(pageId) {
-      Object.values(pages).forEach(p => p.classList.remove('active'));
-      pages[pageId].classList.add('active');
-      navItems.forEach(n => n.classList.remove('active'));
-      document.querySelector(`.nav-item[data-page="${pageId}"]`).classList.add('active');
-      
-      const titulos = {
-        calc: 'Calculadora GlobalEnvíos',
-        compra: 'Compra de Divisas',
-        cuentas: 'Cuentas de Depósito',
-        envios: 'Mis Envíos',
-        history: 'Historial de Consultas',
-        stats: 'Estadísticas'
-      };
-      tituloHeader.textContent = titulos[pageId] || 'Calculadora';
-
-      if (pageId === 'envios') renderEnvios();
-      else if (pageId === 'history') renderConsultas();
-      else if (pageId === 'stats') actualizarEstadisticas();
-      else if (pageId === 'cuentas') renderizarCuentas(buscarCuentas.value);
-    }
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => cambiarPagina(item.dataset.page));
-    });
-
-    // Buscador de cuentas
-    buscarCuentas.addEventListener('input', (e) => {
-      renderizarCuentas(e.target.value);
-    });
-
-    // Botón agregar manual
-    btnAgregarManual.addEventListener('click', () => {
-      formEnvioManual.style.display = formEnvioManual.style.display === 'none' ? 'block' : 'none';
-    });
-
-    btnGuardarManual.addEventListener('click', () => {
-      const metodo = document.getElementById('metodo-manual').value;
-      const monto = parseFloat(document.getElementById('monto-manual').value);
-      const moneda = document.getElementById('moneda-manual').value;
-      const tasa = parseFloat(document.getElementById('tasa-manual').value);
-      const destinatario = document.getElementById('destinatario-manual').value.trim() || 'Sin nombre';
-      const nota = document.getElementById('nota-manual').value.trim();
-
-      if (!metodo || isNaN(monto) || monto < 20 || !moneda || isNaN(tasa)) {
-        return mostrarToast('⚠️ Completa todos los campos correctamente');
-      }
-      let comision = 0;
-      let montoEfectivo = monto;
-      if (monto < 49.9) { comision = 5; montoEfectivo = monto -5; }
-      const recibido = montoEfectivo * tasa;
-
-      const nuevoEnvio = {
-        id: Date.now(),
-        metodo,
-        montoOriginal: monto,
-        comision,
-        moneda,
-        tasa,
-        recibido,
-        destinatario,
-        nota,
-        fecha: new Date().toLocaleString()
-      };
-      const envios = obtenerEnvios();
-      envios.unshift(nuevoEnvio);
-      guardarEnvios(envios);
-      formEnvioManual.style.display = 'none';
-      document.getElementById('monto-manual').value = '';
-      document.getElementById('tasa-manual').value = '';
-      document.getElementById('destinatario-manual').value = '';
-      document.getElementById('nota-manual').value = '';
-      renderEnvios(busquedaEnvios.value);
-      actualizarEstadisticas();
-      mostrarToast('✅ Envío manual guardado');
-    });
-
-    // Calculadora
-    function actualizarBotonActivo() {
-      [btnCUP, btnMLC, btnUSD].forEach(b => b.classList.remove('active-currency'));
-      if (monedaSeleccionada === 'cup') btnCUP.classList.add('active-currency');
-      else if (monedaSeleccionada === 'mlc') btnMLC.classList.add('active-currency');
-      else if (monedaSeleccionada === 'usd') btnUSD.classList.add('active-currency');
-    }
-    btnCUP.addEventListener('click', () => { monedaSeleccionada='cup'; actualizarBotonActivo(); });
-    btnMLC.addEventListener('click', () => { monedaSeleccionada='mlc'; actualizarBotonActivo(); });
-    btnUSD.addEventListener('click', () => { monedaSeleccionada='usd'; actualizarBotonActivo(); });
-
-    function obtenerTasas() {
-      return tasasBase[selector.value] || tasasBase['EEUU'];
-    }
-
-    function formatearMoneda(valor, moneda) {
-      if (moneda === 'usd' || moneda === 'USD') return `$${valor.toFixed(2)} USD`;
-      if (moneda === 'mlc' || moneda === 'MLC') return `${valor.toFixed(2)} MLC`;
-      return `${valor.toFixed(2)} CUP`;
-    }
-
-    function calcular() {
-      const monto = parseFloat(montoInput.value);
-      if (isNaN(monto) || monto < 25) {
-        mostrarToast('⚠️ El monto mínimo es 25');
-        return;
-      }
-      const tasas = obtenerTasas();
-      let tasa = monedaSeleccionada === 'cup' ? tasas.cup : (monedaSeleccionada === 'mlc' ? tasas.mlc : tasas.usd);
-      if (monedaSeleccionada === 'usd' && tasa === 0) {
-        mostrarToast('❌ No disponemos de USD cash para este país');
-        return;
-      }
-      if (monedaSeleccionada === 'mlc' && tasa === 0) {
-        mostrarToast('❌ No disponemos de CUP en tarjeta para este país');
-        return;
-      }
-      let montoEfectivo = monto;
-      let comision = 0;
-      if (monto < 49.9) { comision = 5; montoEfectivo = monto -5; }
-      const recibido = montoEfectivo * tasa;
-      const monedaNombre = monedaSeleccionada === 'cup' ? 'CUP' : (monedaSeleccionada === 'mlc' ? 'MLC' : 'USD');
-
-      ultimoCalculo = {
-        metodo: selector.options[selector.selectedIndex].text,
-        montoOriginal: monto,
-        comision,
-        moneda: monedaNombre,
-        tasa,
-        recibido,
-        fecha: new Date().toLocaleString()
-      };
-
-      resultadoTexto.textContent = formatearMoneda(recibido, monedaSeleccionada);
-      detalleTexto.innerHTML = `
-        <div><strong>Envías:</strong> ${monto.toFixed(2)} ${monedasLocales[selector.value] || 'USD'}</div>
-        ${comision > 0 ? `<div><strong>Comisión (-5 ${monedasLocales[selector.value] || 'USD'}):</strong> se descuenta</div>` : ''}
-        <div><strong>Tasa:</strong> ${tasa.toFixed(2)}</div>
-        <div><strong>Recibes:</strong> ${formatearMoneda(recibido, monedaSeleccionada)}</div>
-      `;
-      resultadoBox.classList.add('show');
-      registroRapido.classList.remove('show');
-
-      const consultas = obtenerConsultas();
-      const duplicado = consultas.findIndex(c =>
-        c.metodo === ultimoCalculo.metodo && c.montoOriginal === ultimoCalculo.montoOriginal && c.moneda === ultimoCalculo.moneda
-      );
-      if (duplicado !== -1) consultas[duplicado].fecha = ultimoCalculo.fecha;
-      else {
-        consultas.unshift({ id: Date.now(), ...ultimoCalculo });
-        if (consultas.length > 50) consultas.pop();
-      }
-      guardarConsultas(consultas);
-
-      setTimeout(() => resultadoBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
-    }
-    btnCalcular.addEventListener('click', calcular);
-
-    btnCopiar.addEventListener('click', () => {
-      if (!ultimoCalculo) return;
-      const texto = `💰 Envío: ${ultimoCalculo.metodo}\nMonto: ${ultimoCalculo.montoOriginal.toFixed(2)} ${monedasLocales[selector.value] || 'USD'}\nRecibes: ${formatearMoneda(ultimoCalculo.recibido, ultimoCalculo.moneda.toLowerCase())}\nTasa: ${ultimoCalculo.tasa.toFixed(2)}`;
-      navigator.clipboard.writeText(texto)
-        .then(() => mostrarToast('📋 Resultado copiado'))
-        .catch(() => mostrarToast('⚠️ No se pudo copiar'));
-    });
-
-    async function generarImagenPersonalizada(datos) {
-      const tarjeta = document.createElement('div');
-      tarjeta.className = 'tarjeta-imagen';
-      const destinatario = datos.destinatario ? `<div class="detalle-item"><span>Destinatario</span> ${datos.destinatario}</div>` : '';
-      const monedaLocal = monedasLocales[selector.value] || 'USD';
-      tarjeta.innerHTML = `
-        <div class="logo"><i class="fas fa-exchange-alt"></i>FACTURA GL🌎BAL ENVÍOS $</div>
-        <div class="monto-envio"><span style="opacity:0.8;">Envías</span> <strong>${datos.montoOriginal.toFixed(2)} ${monedaLocal}</strong></div>
-        <div class="recibido">${formatearMoneda(datos.recibido, datos.moneda)}</div>
-        <div class="detalles">
-          ${destinatario}
-          <div class="detalle-item"><span>Método</span> ${datos.metodo}</div>
-          <div class="detalle-item"><span>Tasa</span> ${datos.tasa.toFixed(2)}</div>
-          <div class="detalle-item"><span>Comisión</span> ${datos.comision > 0 ? '-5 ' + monedaLocal : 'Ninguna'}</div>
-          <div class="detalle-item"><span>Fecha</span> ${datos.fecha}</div>
-        </div>
-        <div class="firma">Servicios de envíos de 💱 divisas en Ciego de Ávila, Morón, Habana. Cumpliremos con usted dentro las 24 horas hábiles para cada envío realizado. Una vez entregado el dinero a su familiar le confirmaremos gracias 🫂 por elegirnos</div>`;
-      document.body.appendChild(tarjeta);
-      try {
-        const canvas = await html2canvas(tarjeta, { scale: 2, backgroundColor: null });
-        canvas.toBlob(blob => {
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url; a.download = `envio_${Date.now()}.png`; a.click();
-          URL.revokeObjectURL(url);
-          mostrarToast('✅ Imagen descargada');
-        }, 'image/png');
-      } catch (e) {
-        mostrarToast('❌ Error al generar imagen');
-      } finally {
-        document.body.removeChild(tarjeta);
-      }
-    }
-    btnImagen.addEventListener('click', () => {
-      if (ultimoCalculo) generarImagenPersonalizada(ultimoCalculo);
-      else mostrarToast('Primero realiza un cálculo');
-    });
-
-    btnRegistrarEnvio.addEventListener('click', () => {
-      if (!ultimoCalculo) return mostrarToast('Primero calcula');
-      registroRapido.classList.toggle('show');
-    });
-
-    btnGuardarEnvio.addEventListener('click', () => {
-      if (!ultimoCalculo) return;
-      const destinatario = destinatarioInput.value.trim() || 'Sin nombre';
-      const nota = notaInput.value.trim();
-      const nuevoEnvio = {
-        id: Date.now(),
-        ...ultimoCalculo,
-        destinatario,
-        nota
-      };
-      const envios = obtenerEnvios();
-      envios.unshift(nuevoEnvio);
-      guardarEnvios(envios);
-      registroRapido.classList.remove('show');
-      destinatarioInput.value = '';
-      notaInput.value = '';
-      mostrarToast('✅ Envío registrado correctamente');
-      if (pages.envios.classList.contains('active')) renderEnvios();
-      actualizarEstadisticas();
-    });
-
-    // Renderizar consultas
-    function renderConsultas(filtro = '') {
-      let consultas = obtenerConsultas();
-      if (filtro) {
-        consultas = consultas.filter(c =>
-          c.metodo.toLowerCase().includes(filtro.toLowerCase()) ||
-          c.moneda.toLowerCase().includes(filtro.toLowerCase())
-        );
-      }
-      if (consultas.length === 0) {
-        listaConsultas.innerHTML = '<p style="color:#7f8c8d; text-align:center;">Sin consultas registradas.</p>';
-        return;
-      }
-      listaConsultas.innerHTML = consultas.map(c => `
-        <div class="lista-item">
-          <div class="fecha"><i class="far fa-clock"></i> ${c.fecha}</div>
-          <div><strong>${c.metodo}</strong> → ${formatearMoneda(c.recibido, c.moneda)}</div>
-          <div>Envías: $${c.montoOriginal.toFixed(2)} USD | Tasa: ${c.tasa.toFixed(2)}</div>
-          <div class="acciones-item">
-            <button class="btn-icon" onclick="window.exportarConsulta('${c.id}')"><i class="fas fa-camera"></i></button>
-            <button class="btn-icon delete" onclick="window.eliminarConsulta('${c.id}')"><i class="fas fa-trash-alt"></i></button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    window.exportarConsulta = (id) => {
-      const consulta = obtenerConsultas().find(c => c.id == id);
-      if (consulta) generarImagenPersonalizada(consulta);
-    };
-    window.eliminarConsulta = (id) => {
-      if (confirm('¿Eliminar esta consulta?')) {
-        guardarConsultas(obtenerConsultas().filter(c => c.id != id));
-        renderConsultas(busquedaConsultas.value);
-      }
-    };
-
-    // Renderizar envíos
-    function renderEnvios(filtro = '') {
-      let envios = obtenerEnvios();
-      if (filtro) {
-        envios = envios.filter(e =>
-          e.metodo.toLowerCase().includes(filtro.toLowerCase()) ||
-          e.destinatario.toLowerCase().includes(filtro.toLowerCase()) ||
-          e.moneda.toLowerCase().includes(filtro.toLowerCase()) ||
-          (e.nota && e.nota.toLowerCase().includes(filtro.toLowerCase()))
-        );
-      }
-      if (envios.length === 0) {
-        listaEnvios.innerHTML = '<p style="color:#7f8c8d; text-align:center;">No hay envíos registrados.</p>';
-        return;
-      }
-      listaEnvios.innerHTML = envios.map(e => `
-        <div class="lista-item">
-          <div class="fecha"><i class="far fa-clock"></i> ${e.fecha}</div>
-          <div><strong>${e.destinatario}</strong> - ${e.metodo}</div>
-          <div>Envías: $${e.montoOriginal.toFixed(2)} USD → Recibes: ${formatearMoneda(e.recibido, e.moneda)}</div>
-          ${e.nota ? `<div style="color:#555; font-size:0.8rem;">📝 ${e.nota}</div>` : ''}
-          <div class="acciones-item">
-            <button class="btn-icon" onclick="window.exportarEnvio('${e.id}')"><i class="fas fa-camera"></i></button>
-            <button class="btn-icon delete" onclick="window.eliminarEnvio('${e.id}')"><i class="fas fa-trash-alt"></i></button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    window.exportarEnvio = (id) => {
-      const envio = obtenerEnvios().find(e => e.id == id);
-      if (envio) generarImagenPersonalizada(envio);
-    };
-    window.eliminarEnvio = (id) => {
-      if (confirm('¿Eliminar este envío?')) {
-        guardarEnvios(obtenerEnvios().filter(e => e.id != id));
-        renderEnvios(busquedaEnvios.value);
-        actualizarEstadisticas();
-      }
-    };
-
-    busquedaConsultas.addEventListener('input', (e) => renderConsultas(e.target.value));
-    busquedaEnvios.addEventListener('input', (e) => renderEnvios(e.target.value));
-
-    // Estadísticas
-    function actualizarEstadisticas() {
-      const envios = obtenerEnvios();
-      if (!envios.length) {
-        statsResumen.innerHTML = '<p style="grid-column: span 2; color:#7f8c8d;">Sin envíos registrados.</p>';
-        graficoMetodos.innerHTML = '';
-        return;
-      }
-      const totalEnviado = envios.reduce((s, e) => s + e.montoOriginal, 0);
-      const promedioEnvio = totalEnviado / envios.length;
-      const metodos = {};
-      envios.forEach(e => { metodos[e.metodo] = (metodos[e.metodo] || 0) + 1; });
-      const metodoTop = Object.entries(metodos).sort((a,b) => b[1] - a[1])[0]?.[0] || '-';
-      const monedaTop = Object.entries(envios.reduce((acc, e) => {
-        acc[e.moneda] = (acc[e.moneda] || 0) + e.recibido; return acc;
-      }, {})).sort((a,b) => b[1] - a[1])[0]?.[0] || '-';
-
-      statsResumen.innerHTML = `
-        <div class="stat-card"><h3>Total enviado</h3><div class="valor">$${totalEnviado.toFixed(0)}</div><div class="unidad">USD</div></div>
-        <div class="stat-card"><h3>Promedio/Envío</h3><div class="valor">$${promedioEnvio.toFixed(0)}</div><div class="unidad">USD</div></div>
-        <div class="stat-card"><h3>Método #1</h3><div class="valor" style="font-size:1.2rem;">${metodoTop}</div><div class="unidad">más usado</div></div>
-        <div class="stat-card"><h3>Moneda top</h3><div class="valor" style="font-size:1.2rem;">${monedaTop}</div><div class="unidad">más recibida</div></div>
-      `;
-      const totalMetodos = Object.values(metodos).reduce((a,b) => a+b, 0);
-      graficoMetodos.innerHTML = Object.entries(metodos).map(([metodo, cuenta]) => {
-        const pct = Math.round((cuenta / totalMetodos) * 100);
-        return `<div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-          <span style="width:90px; font-size:0.8rem;">${metodo}</span>
-          <div style="flex:1; height:22px; background:#e9eef2; border-radius:10px; overflow:hidden;">
-            <div style="width:${pct}%; height:100%; background:linear-gradient(90deg, #0b2b5e, #1b4a7a); border-radius:10px; display:flex; align-items:center; justify-content:flex-end; padding-right:6px; color:white; font-size:0.7rem;">${pct}%</div>
-          </div>
-        </div>`;
-      }).join('');
-    }
-
-    // Contacto
-    contactBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      contactDropdown.classList.toggle('active');
-    });
-    
-    // Cerrar dropdown al hacer clic fuera
-    document.addEventListener('click', (e) => {
-      if (!contactBtn.contains(e.target) && !contactDropdown.contains(e.target)) {
-        contactDropdown.classList.remove('active');
-      }
-    });
-
-    // Inicial
-    actualizarBotonActivo();
-    actualizarEtiquetaMonto();
-    renderConsultas();
-    renderizarCuentas();
-    actualizarEstadisticas();
-  })();
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => console.log('Service Worker registrado', reg))
-      .catch(err => console.error('Error al registrar SW', err));
-  }
-</script>
-</body>
-</html>
